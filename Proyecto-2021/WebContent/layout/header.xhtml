@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui" >
+ <!-- <p:panelGrid columns="1" style="text-align: left;" cellpadding="2">  -->
+    	
+    	
+   	<div style="background-color: #809fff;padding: 12px">
+		<span
+			style="color: white; font-size: 180%; font-family: Arial; margin: 20px">
+			Aplicación IAGRO</span>
+
+	</div>
+   	
+    	
+    <h:form>  
+    <p:growl id="messages"/>
+     <p:menubar >
+ 		
+ 		
+ 		   <p:menuitem value="Página principal" icon="ui-icon-document" action="principal.xhtml">
+           
+        </p:menuitem>
+ 		
+        <p:submenu label="Gestion de Usuarios" icon="ui-icon-document" rendered="#{gestionUsuarios.rolAdmin()}">
+            <p:menuitem value="Seleccion de usuario"   outcome="/pages/Usuarios.xhtml" />
+            <p:menuitem value="Alta de usuario" outcome="/pages/DatosUsuario.xhtml"  >
+            	<f:param name="id" value="" />
+    			<f:param name="modalidad" value="insert" />
+            </p:menuitem>
+        </p:submenu>
+        
+        <p:submenu label="Gestion de Formularios" icon="ui-icon-document" rendered ="#{gestionUsuarios.rolExperto()}">
+          <p:menuitem value="Seleccion de formulario"   outcome="/pages/formularios.xhtml" /> 
+          <p:menuitem value="Nuevo Formulario" outcome="/pages/NewFormulario.xhtml"   /> 	 
+        </p:submenu>
+        <p:submenu label="Gestion de Actividades" icon="ui-icon-document">
+            <p:menuitem value="Seleccion de Actividades por fecha"   outcome="/pages/Actividades.xhtml"  /> 
+              <p:menuitem value="Seleccion de Actividades por metodo muestreo"   outcome="/pages/ActividadesMetodoMuestreo.xhtml"  /> 
+        </p:submenu>
+ 
+    
+       
+ 		<p:menuitem value="Logout" url="login.xhtml" icon="ui-icon-close"  />
+ 
+ 
+
+ 
+    </p:menubar>
+</h:form>
+ 
+    
+   <!--   </p:panelGrid> -->      	
+   	
+    		
+            
+</ui:composition>

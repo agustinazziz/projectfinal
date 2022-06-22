@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition template="/layout/layout.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">
+		<c:set var="title" value="Gestion de Usuarios" scope="request" />
+	</ui:define>
+	
+	<ui:define name="content">
+	<h:form>
+		<h:link value="Nuevo usuario" outcome="DatosUsuario.xhtml">
+    			<f:param name="id" value="" />
+    			<f:param name="modalidad" value="insert" />
+    	</h:link>
+	
+    
+	<h3><h:outputLabel value="Criterios de Seleccion"/></h3>
+	
+		
+		 <p:messages id="messages" showDetail="true" closable="true">
+        	<p:autoUpdate />
+    	</p:messages>
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Nombre" />
+			<p:inputText id="nombre" value="#{gestionUsuarios.criterioNombre}" />
+			
+			
+				<p:outputLabel value="Rol" />
+		<p:selectOneMenu id="rolUsuario" value="#{gestionUsuarios.criterioRol}">
+   				<f:selectItem itemValue="" itemLabel="Todos" />
+   				<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+   				<f:selectItem itemValue="Común" itemLabel="Común" />
+   				<f:selectItem itemValue="Experto" itemLabel="Experto" />
+			</p:selectOneMenu>
+			
+					<p:outputLabel value="Estado" />
+		<p:selectOneMenu id="activo" value="#{gestionUsuarios.criterioActivo}">
+   				<f:selectItem itemValue="" itemLabel="Todos" />
+   				<f:selectItem itemValue="true" itemLabel="Activo" />
+   				<f:selectItem itemValue="false" itemLabel="Inactivo" />
+			</p:selectOneMenu>
+
+					
+			
+							
+		
+
+		</h:panelGrid>
+		<h:commandButton value="Buscar"	action="#{gestionUsuarios.seleccionarUsuarios}" />
+				
+	</h:form>
+
+	<h3><h:outputLabel value="Usuarios seleccionados"/></h3>
+	<p:dataTable value="#{gestionUsuarios.usuariosSeleccionados}"
+		var="usuario"
+		tableStyle="width:auto"
+		   styleClass = "employeeTable"
+   		   headerClass = "employeeTableHeader">
+   		   
+   		   	<p:column  sortBy="#{usuario.id}">
+			<f:facet name="header">ID</f:facet>    				
+      		#{usuario.id}
+   		</p:column>
+   
+   		<p:column  sortBy="#{usuario.id}">
+			<f:facet name="header">Nombre</f:facet>    				
+      		#{usuario.nombre}
+   		</p:column>
+   
+
+		<p:column sortBy="#{usuario.apellido}">
+			<f:facet name="header">Apellido</f:facet>
+		      #{usuario.apellido}
+		</p:column>
+
+		<p:column sortBy="#{usuario.cedula}">
+			<f:facet name="header">Cedula</f:facet>
+      		#{usuario.cedula}
+   		</p:column>
+
+		<p:column sortBy="#{usuario.usuarioCuenta}">
+			<f:facet name="header">Cuenta Usuario</f:facet>
+      		#{usuario.usuarioCuenta}
+		</p:column>
+		
+		<p:column sortBy="#{usuario.contrasenia}">
+			<f:facet name="header">Contraseña</f:facet>
+      		#{usuario.contrasenia}
+		</p:column>
+		
+		<p:column sortBy="#{usuario.instituto}">
+			<f:facet name="header">Instituto</f:facet>
+      		#{usuario.instituto}
+		</p:column>
+		
+		<p:column sortBy="#{usuario.profesion}">
+			<f:facet name="header" >Profesión</f:facet>
+      		#{usuario.profesion}
+		</p:column>
+		
+		<p:column sortBy="#{usuario.email}">
+			<f:facet name="header">Email</f:facet>
+      		#{usuario.email}
+		</p:column>
+		
+		<p:column sortBy="#{usuario.rolUsuario}">
+			<f:facet name="header">Rol de Usuario</f:facet>
+      		#{usuario.rolUsuario}
+		</p:column>
+		
+		<p:column sortBy="#{usuario.activo}">
+			<f:facet name="header">Activo</f:facet>
+      		#{usuario.activo}
+      		
+		</p:column>
+		
+		<p:column sortBy="#{usuario.id}">
+			<f:facet name="header">Modificar</f:facet>
+	      	<p:commandLink  action="#{gestionUsuarios.verDatosUsuario()}"  >
+	      		<f:param name="id" value="${usuario.id}" />
+    			<f:param name="modalidad" value="view" />
+               
+	         </p:commandLink>
+	      
+			<h:link value="Ver detalle" outcome="DatosUsuario.xhtml" >
+    			<f:param name="id" value="${usuario.id}" />
+    			<f:param name="modalidad" value="view" />
+			</h:link>
+		
+		</p:column>
+		
+		
+	</p:dataTable>
+
+    
+    
+    </ui:define>
+</ui:composition>

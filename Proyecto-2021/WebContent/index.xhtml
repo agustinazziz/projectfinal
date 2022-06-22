@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition template="/layout/layoutlogin.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">
+		<c:set var="title" value="Login" scope="request" />
+	</ui:define>
+	
+	
+		<ui:define name="content">
+	<h:form>
+		<p:messages autoUpdate="true" visible="true"/>
+	<h:panelGrid columns="2">
+			
+			
+			
+			
+	
+			<p:commandButton value="Entrar al sistema" action="pages/login.xhtml"/>
+	</h:panelGrid>		
+
+		</h:form>
+	
+	
+	</ui:define>
+	</ui:composition>

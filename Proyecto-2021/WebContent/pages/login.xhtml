@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition template="/layout/layoutlogin.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">
+		<c:set var="title" value="Login" scope="request" />
+	</ui:define>
+	
+	<ui:define name="content">
+	<h:form>
+		<p:messages autoUpdate="true" visible="true"/>
+	<h:panelGrid columns="2">
+			
+			
+			
+			<p:outputLabel for_="txtUsuario" value="Usuario"/>
+			<p:inputText id="txtUsuario" value="#{gestionUsuarios.nomUser}" required="true" requiredMessage="Ingresar Usuario"/>
+			
+			<p:outputLabel for_="txtClave" value="Clave"/>
+			<p:password id="txtClave" value="#{gestionUsuarios.contrasenia}" required="true" requiredMessage="Ingresar Contraseña"/>
+			<p:outputLabel for_="txtError" rendered="false" value="Usuario o contraseña incorrectos."/>
+	
+			<p:commandButton value="Iniciar Sesión" action="#{gestionUsuarios.inicioSesion}" update="@form">
+
+			</p:commandButton>
+	</h:panelGrid>		
+
+		</h:form>
+	
+	
+	</ui:define>
+	
+	</ui:composition>

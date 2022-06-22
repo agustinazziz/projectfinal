@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition template="/layout/layout.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">
+		<c:set var="title" value="Gestion de Actividad" scope="request" />
+	</ui:define>
+	
+	<ui:define name="content">
+			 
+
+			<h2>Alta de Actividad</h2>
+	
+
+	<h:form id="idActividad">
+		 
+		<p:messages id="messages" showDetail="true" closable="true">
+        	<p:autoUpdate />
+    	
+		
+			
+		
+		<p:panelGrid  columns="3">
+			<p:outputLabel value="Id" />
+			<p:inputText style="margin-left:50px !important;"  id="id" disabled="true"   />
+			<p:message for="id" style="color:red" /> 
+
+			
+			<p:outputLabel value="Caracteristica" />
+			<p:inputText style="margin-left:50px !important;  "  id="caracteristica" disabled="false" value="#{gestionActividad.caracteristica}" />
+			<p:message for="caracteristica" style="color:red" />
+			
+			<p:outputLabel  value="Fecha Inicio" />
+			<p:datePicker id="fechaIni" value="#{gestionActividad.fechaIni}" style="margin-left:50px; " />
+			<p:message for="fechaIni" style="color:red" />
+			
+			<p:outputLabel value="Fecha Fin" />
+			<p:datePicker  id="fechaFin" value="#{gestionActividad.fechaFin}" style="margin-left:50px;" />
+			<p:message for="fechaFin" style="color:red" />
+			
+			<p:outputLabel value="Metodo de muestreo" />
+			<p:inputText style="margin-left:50px !important;"  id="metodoMuestreo" disabled="false" value="#{gestionActividad.metodoMuestreo}" />
+			<p:message for="metodoMuestreo" style="color:red" />
+			
+			<p:outputLabel value="Tipo de muestreo" />
+			<p:inputText style="margin-left:50px !important;"  id="tipoMuestreo" disabled="false" value="#{gestionActividad.tipoMuestreo}" />
+			<p:message for="tipoMuestreo" style="color:red" />
+			
+			<p:outputLabel value="Latitud" />
+			<p:inputText style="margin-left:50px !important;"  id="latitud" disabled="false" value="#{gestionActividad.latitud}" />
+			<p:message for="latitud" style="color:red" />
+			
+			<p:outputLabel value="Longitud" />
+			<p:inputText style="margin-left:50px !important;"  id="longitud" disabled="false" value="#{gestionActividad.longitud}" />
+			<p:message for="longitud" style="color:red" />
+			
+			
+		</p:panelGrid>
+		
+			<br></br><br></br>
+			
+			<h3>Datos del formulario selecionado</h3>
+			
+			<p:outputLabel value="Nombre: " />
+			<p:inputText style="margin-left:78px; width:140px;" value="#{gestionActividad.nombreForm}" disabled="true" /> 
+			
+			<br/><br/>
+			
+			<p:outputLabel style="vertical-align:top;" value="Resumen: " />
+			<p:inputTextarea style="margin-left:70px;" value="#{gestionActividad.resumenForm}" disabled="true"/> 			
+			
+			
+			
+			<h3>Casillas extra del formulario</h3>
+			
+			<h:commandButton value="Agregar campo extra" action="#{gestionActividad.addContador()}" style="margin-right:10px;"></h:commandButton>
+			<h:commandButton value="Eliminar campo extra" action="#{gestionActividad.delContador()}"></h:commandButton><br></br>
+			
+			<br></br><br></br>	
+            	
+        <p:panelGrid columns="3">
+        
+				<c:forEach var="test"  begin="1" end="#{gestionActividad.contador}" varStatus="row">
+            		
+            		<br></br>
+            		<p:outputLabel value=" Campo extra:${test}" />
+            		<br></br>
+            		
+            		<br></br>
+            		<p:outputLabel value="Nombre: " />
+            		<p:inputText id="cExtra-${test}" disabled="true" value="#{gestionActividad.casillaNueva[row.index-1].nombre}"/>
+            		
+            		<br></br>
+            		<p:outputLabel value="Descripción: " />
+            		<p:inputText id="cExtra1-${test}" value="#{gestionActividad.casillaNueva[row.index-1].descripcion}" />
+  
+            		<br></br>
+            		<p:outputLabel value="Parametro: " />            		
+            		<p:inputText id="cExtra2-${test}" value="#{gestionActividad.casillaNueva[row.index-1].parametro}" />
+            		
+            		<br></br>
+            		<p:outputLabel value="Tipo de dato: " />            		
+            		<p:inputText id="cExtra3-${test}" value="#{gestionActividad.casillaNueva[row.index-1].tiposDato}"/>
+
+            		<br></br>
+            		<p:outputLabel value="Unidad de medida: " />            	
+            		<p:inputText id="cExtra4-${test}" value="#{gestionActividad.casillaNueva[row.index-1].unidadesMedida}" />
+            		<br></br>
+            		
+            		
+            	</c:forEach> 
+
+		</p:panelGrid>
+		
+		<p:panelGrid columns= "3">
+
+			<br></br><br></br><br></br>
+
+			<h:commandButton value="Salvar cambios"	 update=":form" />
+		</p:panelGrid>
+		
+		
+		</p:messages>
+
+
+	</h:form>
+
+			 
+			
+			 
+			 
+
+    </ui:define>
+</ui:composition>
+
