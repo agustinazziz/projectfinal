@@ -22,6 +22,8 @@ public class GestionUsuariosBean implements Serializable{
 	@EJB
 	GestionUsuarioService gestionUsuarioService;
 	
+	
+	
 
 
 	/**
@@ -38,7 +40,6 @@ public class GestionUsuariosBean implements Serializable{
 	private String criterioActivo;
 	private String rol;
 	private UsuarioEmpresa usuarioEncontrado = new UsuarioEmpresa();
-	GestionUsuarioBean gUB= new GestionUsuarioBean();
 	
 	private List<Usuario> usuariosSeleccionados;
 	private Usuario usuarioSeleccionado;
