@@ -113,10 +113,6 @@ public class GestionActividadBean implements Serializable{
 			
 		}
 		
-		
-		for (Integer i = 0; i < contador; i++) {
-			System.out.println(casillaNueva.get(i).getNombre());
-		}
 		listaAuxiliar.clear();
 		return "Actividades.xhtml?faces-redirect=true";
 	}
