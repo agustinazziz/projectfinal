@@ -2,9 +2,11 @@
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import com.dao.DAOCasilla;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
@@ -17,8 +19,8 @@ public class CasillasBean implements CasillasBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
 
-	
-	private static DAOCasilla daoCasillas;
+	@EJB
+	DAOCasilla daoCasillas;
 
 	/**
 	 * Default constructor.

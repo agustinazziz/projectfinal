@@ -1,9 +1,11 @@
 package com.capa2LogicaNegocio;
 
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import com.dao.DAOActividad;
 import com.entities.Actividad;
@@ -13,15 +15,24 @@ public class ActividadBean implements ActividadBeanRemote{
 	@PersistenceContext
 	private EntityManager em;
 
+	@EJB
+	DAOActividad daoActividad;
 	
-	private static DAOActividad daoActividad;
+	public ActividadBean() {
+		daoActividad = new DAOActividad();
+	}
 	
 	@Override
 	public Actividad agregarActividad (Actividad actividad) throws Exception {
 		try {
-			return daoActividad.crearActividad(actividad);
-		}catch(Exception e){
 			
+		Actividad actividadNueva = new Actividad();
+		actividadNueva=	daoActividad.crearActividad(actividad);
+		
+		return actividadNueva;
+			
+		}catch(PersistenceException e){
+			System.out.println(e.getMessage());
 		}
 		
 		return actividad;

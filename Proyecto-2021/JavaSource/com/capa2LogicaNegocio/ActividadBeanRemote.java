@@ -12,5 +12,6 @@ public interface ActividadBeanRemote {
 	Actividad buscarActividad(Actividad actividad) throws Exception;
 
 	Actividad modificarActividad(Actividad actividad) throws Exception;
+	
 
 }

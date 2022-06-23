@@ -4,6 +4,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Actividad;
@@ -41,7 +42,7 @@ public class DAOActividad {
 			
 				return nuevaActividad;		
 
-		}catch (Exception e){
+		}catch (PersistenceException e){
 			System.out.println(e.getMessage());
 		}
 		return actividad;

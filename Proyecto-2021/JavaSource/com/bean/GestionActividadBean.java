@@ -10,10 +10,12 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import com.capa2LogicaNegocio.ActividadBeanRemote;
+import com.capa2LogicaNegocio.GestionUsuarioService;
 import com.entities.Actividad;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
 import com.entities.UsuarioEmpresa;
+import com.exception.PersistenciaException;
 
 @Named(value="gestionActividad")		//JEE8
 @SessionScoped				        //JEE8
@@ -26,6 +28,8 @@ public class GestionActividadBean implements Serializable{
 
 	@EJB
 	ActividadBeanRemote actividadBean;
+	@EJB
+	GestionUsuarioService gestionUsuario;
 	
 	public Actividad crearActividad(Actividad actividad) throws Exception {
 		return actividadBean.agregarActividad(actividad);
@@ -66,9 +70,15 @@ public class GestionActividadBean implements Serializable{
 
 //	METODOS  //
 	
-	public void salvarCambios() {
-		System.out.println(fechaIni);
-		System.out.println(fechaFin);
+	public void salvarCambios() throws Exception  {
+		usuarioCreador = gestionUsuario.buscarInicioSesion("agustin.azziz", "123");
+		Actividad nuevaActividad = new Actividad(caracteristica,fechaIni,
+			fechaFin,metodoMuestreo,tipoMuestreo,usuarioCreador,formActividad);
+		try {
+			actividadBean.agregarActividad(nuevaActividad);
+		}catch(PersistenciaException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void addContador() {

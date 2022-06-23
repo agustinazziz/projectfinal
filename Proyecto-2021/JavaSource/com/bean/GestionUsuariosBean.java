@@ -2,9 +2,12 @@ package com.bean;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;	//JEE8
 import javax.inject.Named;
+import javax.persistence.PersistenceException;
+
 import com.capa2LogicaNegocio.GestionUsuarioService;
 import com.capa2LogicaNegocio.Usuario;
 import com.entities.UsuarioEmpresa;
@@ -18,6 +21,7 @@ public class GestionUsuariosBean implements Serializable{
 	
 	@EJB
 	GestionUsuarioService gestionUsuarioService;
+	
 
 
 	/**
@@ -55,7 +59,7 @@ public class GestionUsuariosBean implements Serializable{
 		return "DatosUsuario";
 	}
 	
-	public String inicioSesion () {
+	public String inicioSesion () throws PersistenciaException {
 		String redireccion = null;
 		
 		
@@ -63,7 +67,6 @@ public class GestionUsuariosBean implements Serializable{
 			usuarioEncontrado = gestionUsuarioService.buscarInicioSesion(nomUser, contrasenia);
 			
 			if (usuarioEncontrado !=null) {
-				
 			rol=usuarioEncontrado.getRolUsuario();
 			redireccion="principal";
 			
@@ -71,8 +74,9 @@ public class GestionUsuariosBean implements Serializable{
 			else {
 			
 			}
-		}catch (Exception e) {
-			
+		}catch (PersistenceException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
 		}
 		return redireccion;
 		
