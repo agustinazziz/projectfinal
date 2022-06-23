@@ -107,8 +107,7 @@
 				<f:param name="nomForm" value="#{forms.nombre}" />
 				<f:param name="resumenForm" value="#{forms.resumen}" />
 				<f:param name="idForm" value="#{forms.id}" />
-				
-				<c:forEach varStatus="row" var="cas" begin="0" end="#{gestionActividad.contador+1}">
+				<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+2}">
 					<f:param name="casNom-${cas}" value="#{forms.casillaNueva[row.index].nombre}"/>
 					<f:param name="casDesc-${cas}" value="#{forms.casillaNueva[row.index].descripcion}"/>
 					<f:param name="casParam-${cas}" value="#{forms.casillaNueva[row.index].parametro}"/>

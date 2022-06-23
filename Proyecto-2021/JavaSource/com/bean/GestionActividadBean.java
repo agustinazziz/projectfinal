@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import com.capa2LogicaNegocio.ActividadBeanRemote;
@@ -85,15 +83,41 @@ public class GestionActividadBean implements Serializable{
 			casillaNueva.remove(contador+1-1);
 		}
 	}
+	
+	public String prepCasillas() {
+		for (Integer i = 0 ; i < 10 ; i++) {
+			CasillaNueva casillaAux = new CasillaNueva();
+			casillaNueva.add(casillaAux);
+		}
+		return"/pages/formularios.xhtml";
+	}
 
 	public String modifContador() {
 		contador = Integer.parseInt(contadorString);
 		controladorContador= contador;
 		
-		for (Integer i = 0; i <= contador+1; i++) {
-			CasillaNueva nuevaCas= new CasillaNueva("","","","","");
-			casillaNueva.add(nuevaCas);
+		
+			List<CasillaNueva> listaAuxiliar = new ArrayList<CasillaNueva>();
+		for (Integer i = 0; i < contador; i++) {
+			CasillaNueva casillaAux= new CasillaNueva();
+			listaAuxiliar.add(casillaAux);
+			listaAuxiliar.set(i, casillaNueva.get(i));
 		}
+		
+		
+			casillaNueva.clear();
+		for (Integer i = 0; i < contador; i++) {
+			CasillaNueva casillaAux= new CasillaNueva();
+			casillaNueva.add(casillaAux);
+			casillaNueva.set(i, listaAuxiliar.get(i));
+			
+		}
+		
+		
+		for (Integer i = 0; i < contador; i++) {
+			System.out.println(casillaNueva.get(i).getNombre());
+		}
+		listaAuxiliar.clear();
 		return "Actividades.xhtml?faces-redirect=true";
 	}
 	
