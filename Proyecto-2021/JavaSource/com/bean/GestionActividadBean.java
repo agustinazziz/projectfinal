@@ -126,9 +126,6 @@ public class GestionActividadBean implements Serializable{
 	public String getIdForm() {
 		return idForm;
 	}
-
-
-
 	public void setIdForm(String idForm) {
 		this.idForm = idForm;
 	}
