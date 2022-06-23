@@ -15,7 +15,11 @@
 		<p:messages autoUpdate="true" visible="true"/>
 	<h:panelGrid columns="2">
 			
+			<f:metadata>
+				<f:viewParam name="usuarioActividad" value="#{gestionActividad.usuarioActividad}" />
+				<f:viewParam name="contraseñaActividad" value="#{gestionActividad.contraseñaActividad}" />
 			
+			</f:metadata>
 			
 			<p:outputLabel for_="txtUsuario" value="Usuario"/>
 			<p:inputText id="txtUsuario" value="#{gestionUsuarios.nomUser}" required="true" requiredMessage="Ingresar Usuario"/>
@@ -25,7 +29,8 @@
 			<p:outputLabel for_="txtError" rendered="false" value="Usuario o contraseña incorrectos."/>
 	
 			<p:commandButton value="Iniciar Sesión" action="#{gestionUsuarios.inicioSesion}" update="@form">
-
+				<f:param name="usuarioActividad" value="#{gestionUsuarios.nomUser}"/>
+				<f:param name="contraseñaActividad" value="#{gestionUsuarios.contrasenia}"/>
 			</p:commandButton>
 	</h:panelGrid>		
 

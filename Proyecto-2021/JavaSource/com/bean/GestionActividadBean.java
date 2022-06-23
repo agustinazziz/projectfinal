@@ -56,6 +56,9 @@ public class GestionActividadBean implements Serializable{
 	UsuarioEmpresa usuarioCreador;
 	FormularioNuevo formActividad;
 	
+	String usuarioActividad;
+	String contraseñaActividad;
+	
 	String idForm;
 	String nombreForm;
 	String resumenForm;
@@ -71,7 +74,7 @@ public class GestionActividadBean implements Serializable{
 //	METODOS  //
 	
 	public void salvarCambios() throws Exception  {
-		usuarioCreador = gestionUsuario.buscarInicioSesion("agustin.azziz", "123");
+		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
 		Actividad nuevaActividad = new Actividad(caracteristica,fechaIni,
 			fechaFin,metodoMuestreo,tipoMuestreo,usuarioCreador,formActividad);
 		try {
@@ -138,6 +141,32 @@ public class GestionActividadBean implements Serializable{
 	}
 	public void setIdForm(String idForm) {
 		this.idForm = idForm;
+	}
+
+	
+	
+	
+
+	public String getUsuarioActividad() {
+		return usuarioActividad;
+	}
+
+
+
+	public void setUsuarioActividad(String usuarioActividad) {
+		this.usuarioActividad = usuarioActividad;
+	}
+
+	
+
+	public String getContraseñaActividad() {
+		return contraseñaActividad;
+	}
+
+
+
+	public void setContraseñaActividad(String contraseñaActividad) {
+		this.contraseñaActividad = contraseñaActividad;
 	}
 
 
