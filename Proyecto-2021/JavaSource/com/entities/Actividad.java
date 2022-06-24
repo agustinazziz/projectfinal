@@ -85,9 +85,11 @@ public class Actividad implements Serializable {
 		this.formActividad = formActividad;
 	}
 
+
 	public long getIdActividad() {
 		return idActividad;
 	}
+	
 
 	public void setIdActividad(long idActividad) {
 		this.idActividad = idActividad;

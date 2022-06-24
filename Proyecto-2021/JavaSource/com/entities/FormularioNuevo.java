@@ -39,12 +39,16 @@ public class FormularioNuevo implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, mappedBy="formNuevo")
     private List<CasillaNueva> casillaNueva;
     
-    @OneToMany( cascade= CascadeType.ALL, mappedBy="formActividad")
+    @OneToMany( fetch = FetchType.EAGER, cascade= CascadeType.ALL, mappedBy="formActividad")
     private Set<Actividad> actividadNueva;
     
 	
 	public FormularioNuevo() {
 		super();
+	}
+	
+	public void addActividad(Actividad actividad) {
+		actividadNueva.add(actividad);
 	}
 	
 

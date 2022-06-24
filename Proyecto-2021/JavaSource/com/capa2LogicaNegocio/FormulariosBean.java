@@ -6,9 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 
-import com.dao.DAOCasilla;
 import com.dao.DAOFormulario;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
@@ -19,16 +17,17 @@ import com.exception.PersistenciaException;
  */
 @Stateless
 @LocalBean
-public class FormulariosBean implements Serializable{
+public class FormulariosBean implements FormulariosBeanRemote{
 
 
-	private static final long serialVersionUID = 1L;
 
 	
 	@EJB
 	DAOFormulario daoFormulario;
 	
-
+	public FormulariosBean(){
+		daoFormulario = new DAOFormulario();
+	}
 	
 
 	public FormularioNuevo insertarFormularioNuevo(String nombre, String resumen, List<CasillaNueva> casillaNueva) throws Exception {
@@ -113,6 +112,10 @@ public class FormulariosBean implements Serializable{
 	public List<CasillaNueva> listarCasillas() {
 		return daoFormulario.listarCasillas();
 	}
+
+
+
+
 
 	
 	
