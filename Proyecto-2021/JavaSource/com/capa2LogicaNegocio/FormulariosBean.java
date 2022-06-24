@@ -51,10 +51,14 @@ public class FormulariosBean implements FormulariosBeanRemote{
 	}
 
 	
-	public void eliminarFormulario(Long id) {
+	public void eliminarFormulario(Long id) throws Exception {
 	
 		
-		daoFormulario.eliminarFormulario(id);
+		try {
+			daoFormulario.eliminarFormulario(id);
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
 		
 		return;
 		

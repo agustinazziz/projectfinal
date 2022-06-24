@@ -6,22 +6,6 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-		<f:metadata>
-			<f:viewParam name="nomForm" value="#{gestionActividad.nombreForm}"/>
-			<f:viewParam name="resumenForm" value="#{gestionActividad.resumenForm}"/>
-			<f:viewParam name="contador" value="#{gestionActividad.contadorString}"/>
-			<f:viewParam name="idForm" value="#{gestionActividad.idForm}"/>
-			<c:forEach varStatus="row" var="cas" begin="0" end="#{gestionActividad.casillaNueva.size()}">
-				<f:viewParam name="casId-${cas}" value="#{gestionActividad.casillaNueva[row.index].idCasilla}"/>
-				<f:viewParam name="casNom-${cas}" value="#{gestionActividad.casillaNueva[row.index].nombre}"/>
-				<f:viewParam name="casDesc-${cas}" value="#{gestionActividad.casillaNueva[row.index].descripcion}"/>
-				<f:viewParam name="casParam-${cas}" value="#{gestionActividad.casillaNueva[row.index].parametro}"/>
-				<f:viewParam name="casTipo-${cas}" value="#{gestionActividad.casillaNueva[row.index].tiposDato}"/>
-				<f:viewParam name="casUni-${cas}" value="#{gestionActividad.casillaNueva[row.index].unidadesMedida}"/>
-			</c:forEach>
-		</f:metadata>
-	
-	
 	
 	<ui:define name="title">
 		<c:set var="title" value="Gestion de Formularios" scope="request" />
@@ -38,7 +22,7 @@
 	</h:form>
 
 	<h3><h:outputLabel value="Formularios seleccionados"/></h3>
-	<p:dataTable id = "formulariosTable" value="#{gestionFormularios.formsEncontrados}" var="forms" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
+	<p:dataTable editable="true" id = "formulariosTable" value="#{gestionFormularios.formsEncontrados}" var="forms" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
    		   
    		   	<p:column  sortBy="#{forms.id}">
 			<f:facet name="header">ID</f:facet>    				
@@ -47,25 +31,19 @@
    		
    		<p:column sortBy="#{forms.nombre}">
 			<f:facet name="header">Nombre</f:facet>
-		     <p style="min-width:80px;white-space: normal !important;"> #{forms.nombre}</p>
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{forms.nombre}"/>
 		</p:column>
 		
-   		<p:column  sortBy="#{forms.resumen}">
-			<f:facet name="header">Resumen</f:facet>    				
-      		<p style="white-space: normal !important;">#{forms.resumen}</p>
+   		<p:column editable="true" sortBy="#{forms.resumen}">
+				<f:facet name="header">Resumen</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{forms.resumen}"/>
    		</p:column>
-   
-		<p:column sortBy="#{forms.status}">
-			<f:facet name="header">Estado</f:facet>
-      		#{forms.status}
-   		</p:column>
-   		
    		
    		<p:column>
 			   		<f:facet name="header"> Casillas Extra </f:facet>
 			   									
 			   									
-   			<p:dataTable value="#{forms.casillaNueva}" var="casilla" >
+   			<p:dataTable tableStyle="width:auto" value="#{forms.casillaNueva}" var="casilla" >
 				
 				
 						<p:column > 
@@ -77,7 +55,6 @@
 						
 						<p:column> 
 							<f:facet name="header">Descripción</f:facet> 	
-								#{casilla.descripcion}		
 						</p:column>
 						
 						<p:column> 
@@ -123,7 +100,24 @@
 			</h:form>
 		</p:column>
 		
+
+		<p:column rendered="#{gestionUsuarios.rolExperto()}">
+			<h:form>
+		   		<h:commandLink onclick="if (! confirm('Está seguro de borrar el formulario?')) return false"
+				value="Borrar Formulario" action="#{gestionFormularios.borrarForm()}" update=":form" class="edit_icon" >
+
+					<f:param name="idFormDel" value="#{forms.id}" />
+
+				</h:commandLink> 
+			</h:form>
+		</p:column>
 		
+		<p:column>
+			<h:form>
+				<h:commandLink  value="Editar formulario" action="/pages/modifForm.xhtml" update=":form">
+				</h:commandLink>			
+			</h:form>
+		</p:column>
 
 	</p:dataTable>
 

@@ -58,9 +58,14 @@ try {
 	}
 }
 
-	public  void eliminarFormulario(Long idForm) { // Elimina de forma lógica
-		em.createQuery("UPDATE FormularioNuevo f SET f.status=0 WHERE f.id='" + idForm + "' ").executeUpdate(); // cambia el
-																											// atributo
+	public  void eliminarFormulario(Long idForm) throws Exception{ // Elimina de forma lógica
+		try {
+			FormularioNuevo formDel = this.find(idForm);
+			em.remove(formDel);
+			em.flush();																									// atributo
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
 																											// status a
 																											// 0.
 		return;
