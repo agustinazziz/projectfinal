@@ -36,6 +36,11 @@ public class GestionFormulariosBean implements Serializable{
 	String idForm;
 	String nombreForm;
 	String resumenForm;
+	
+	String idCasDel;
+	
+	String contadorString;
+	Integer contadorControlador;
 	List<CasillaNueva> casillaNueva = new ArrayList<CasillaNueva>();
 	
 	List<String> casillas;
@@ -87,6 +92,14 @@ public class GestionFormulariosBean implements Serializable{
 		return "";
 	}
 	
+	public String prepModif() {
+		for (Integer i = 0; i < 10; i++) {
+			CasillaNueva casillaAux = new CasillaNueva();
+			casillaNueva.add(casillaAux);
+		}
+		return"true";
+	}
+	
 	public void modifForm() throws Exception {
 		try {
 			FormularioNuevo formModif = formulariosBean.buscarFormulario(Long.parseLong(idForm));
@@ -101,6 +114,41 @@ public class GestionFormulariosBean implements Serializable{
 		
 	}
 	
+	public String prerpModifForm() {
+		
+		contador = Integer.parseInt(contadorString);
+		contadorControlador = contador;
+		List<CasillaNueva> listaAuxiliar = new ArrayList<CasillaNueva>();
+		for (Integer i = 0; i < contador; i++) {
+			CasillaNueva casillaAux = new CasillaNueva();
+			listaAuxiliar.add(casillaAux);
+			listaAuxiliar.set(i, casillaNueva.get(i));
+		}
+
+		casillaNueva.clear();
+		for (Integer i = 0; i < contador; i++) {
+			CasillaNueva casillaAux = new CasillaNueva();
+			casillaNueva.add(casillaAux);
+			casillaNueva.set(i, listaAuxiliar.get(i));
+
+		}
+
+		listaAuxiliar.clear();
+		return "/pages/modifForm.xhtml";
+	
+	}
+	
+	public String prepCrearForm() {
+		
+		this.setContador(0);
+		this.casillaNueva.clear();
+		this.nombreForm="";
+		this.resumenForm="";
+		this.idForm=null;
+		this.contadorString="0";
+		return"/pages/NewFormulario.xhtml";
+	}
+	
 	public void borrarForm() throws Exception {
 		
 		try {
@@ -111,6 +159,17 @@ public class GestionFormulariosBean implements Serializable{
 		}
 
 		
+	}
+	
+	public void borrarCas() throws Exception {
+		try {
+			casillasBean.eliminarCasilla(Long.parseLong(idCasDel));
+			addMessage("Casilla borrada correctamente", "Casilla Borrasa");
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+			System.out.print(e.getCause());
+		}
 	}
 	
     public void addMessage(String summary, String detail) {
@@ -140,7 +199,15 @@ public class GestionFormulariosBean implements Serializable{
 		this.nombreForm = nombreForm;
 	}
 
+	
 
+	public Integer getContadorControlador() {
+		return contadorControlador;
+	}
+
+	public void setContadorControlador(Integer contadorControlador) {
+		this.contadorControlador = contadorControlador;
+	}
 
 	public String getResumenForm() {
 		return resumenForm;
@@ -153,6 +220,24 @@ public class GestionFormulariosBean implements Serializable{
 
 	public void setIdForm(String idForm) {
 		this.idForm = idForm;
+	}
+
+	
+	
+	public String getIdCasDel() {
+		return idCasDel;
+	}
+
+	public void setIdCasDel(String idCasDel) {
+		this.idCasDel = idCasDel;
+	}
+
+	public String getContadorString() {
+		return contadorString;
+	}
+
+	public void setContadorString(String contadorString) {
+		this.contadorString = contadorString;
 	}
 
 	public void setResumenForm(String resumenForm) {
@@ -190,10 +275,17 @@ public class GestionFormulariosBean implements Serializable{
 	}
 	
 	public void delContador() {
-		if (contador >=1) {
+		if (contador >=contador) {
 			contador=contador -1;
 			casillaNueva.remove(contador+1-1);
 
+		}
+	}
+	
+	public void delContadorModif() {
+		if (contador > contadorControlador) {
+			contador = contador - 1;
+			casillaNueva.remove(contador + 1 - 1);
 		}
 	}
 

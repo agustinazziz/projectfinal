@@ -95,4 +95,17 @@ public void altaCasillaClase(CasillaNueva casillaNueva) throws PersistenciaExcep
 	}
 
 }
+
+public static void eliminarCasilla(Long idCas, EntityManager em) throws Exception{ 
+	try {
+		CasillaNueva casDel = buscarCasilla(idCas, em);
+		em.remove(casDel);
+		em.flush();																									// atributo
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+																										// status a
+																										// 0.
+	return;
+}
 }

@@ -60,7 +60,6 @@ public class FormulariosBean implements FormulariosBeanRemote{
 			e.printStackTrace();
 		}
 		
-		return;
 		
 	}
 

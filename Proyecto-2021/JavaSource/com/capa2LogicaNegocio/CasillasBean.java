@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import com.dao.DAOCasilla;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
+import com.exception.PersistenciaException;
 
 /**
  * Session Bean implementation class CasillasBean
@@ -60,6 +61,16 @@ public class CasillasBean implements CasillasBeanRemote {
 	public List<CasillaNueva> listarCasillas() {
 		return daoCasillas.listarCasillas();
 	}
-
+	
+	@Override
+	public void eliminarCasilla(Long idCas) {
+		
+		try {
+			DAOCasilla.eliminarCasilla(idCas, em);;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }

@@ -10,9 +10,38 @@
 	<ui:define name="title">
 		<c:set var="title" value="Gestion de Formularios" scope="request" />
 	</ui:define>
-	
 	<ui:define name="content">
 	
+		<f:metadata>
+			<f:viewParam name="nomForm" value="#{gestionActividad.nombreForm}"/>
+			<f:viewParam name="resumenForm" value="#{gestionActividad.resumenForm}"/>
+			<f:viewParam name="contador" value="#{gestionActividad.contadorString}"/>
+			<f:viewParam name="idForm" value="#{gestionActividad.idForm}"/>
+			<c:forEach varStatus="row" var="cas" begin="0" end="#{gestionActividad.casillaNueva.size()}">
+				<f:viewParam name="casId-${cas}" value="#{gestionActividad.casillaNueva[row.index].idCasilla}"/>
+				<f:viewParam name="casNom-${cas}" value="#{gestionActividad.casillaNueva[row.index].nombre}"/>
+				<f:viewParam name="casDesc-${cas}" value="#{gestionActividad.casillaNueva[row.index].descripcion}"/>
+				<f:viewParam name="casParam-${cas}" value="#{gestionActividad.casillaNueva[row.index].parametro}"/>
+				<f:viewParam name="casTipo-${cas}" value="#{gestionActividad.casillaNueva[row.index].tiposDato}"/>
+				<f:viewParam name="casUni-${cas}" value="#{gestionActividad.casillaNueva[row.index].unidadesMedida}"/>
+			</c:forEach>
+			<f:viewParam name="idFormDel" value="#{gestionFormularios.idForm}"/>
+			<f:viewParam name="idCasDel" value="#{gestionFormularios.idCasDel}"/>
+			<f:viewParam name="nomFormModif" value="#{gestionFormularios.nombreForm}"/>
+			<f:viewParam name="resumenFormModif" value="#{gestionFormularios.resumenForm}"/>
+			<f:viewParam name="contador" value="#{gestionFormularios.contadorString}"/>
+			<f:viewParam name="idFormModif" value="#{gestionFormularios.idForm}"/>
+			<c:forEach varStatus="row" var="cas" begin="0" end="#{gestionFormularios.casillaNueva.size()}">
+				<f:viewParam name="modifcasId-${cas}" value="#{gestionFormularios.casillaNueva[row.index].idCasilla}"/>
+				<f:viewParam name="modifcasNom-${cas}" value="#{gestionFormularios.casillaNueva[row.index].nombre}"/>
+				<f:viewParam name="modifcasDesc-${cas}" value="#{gestionFormularios.casillaNueva[row.index].descripcion}"/>
+				<f:viewParam name="modifcasParam-${cas}" value="#{gestionFormularios.casillaNueva[row.index].parametro}"/>
+				<f:viewParam name="modifcasTipo-${cas}" value="#{gestionFormularios.casillaNueva[row.index].tiposDato}"/>
+				<f:viewParam name="modifcasUni-${cas}" value="#{gestionFormularios.casillaNueva[row.index].unidadesMedida}"/>
+			</c:forEach>
+	
+		</f:metadata>
+
 		<h:form>
 		
 
@@ -22,7 +51,7 @@
 	</h:form>
 
 	<h3><h:outputLabel value="Formularios seleccionados"/></h3>
-	<p:dataTable editable="true" id = "formulariosTable" value="#{gestionFormularios.formsEncontrados}" var="forms" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
+	<p:dataTable id = "formulariosTable" value="#{gestionFormularios.formsEncontrados}" var="forms" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
    		   
    		   	<p:column  sortBy="#{forms.id}">
 			<f:facet name="header">ID</f:facet>    				
@@ -72,6 +101,16 @@
 								#{casilla.unidadesMedida}		
 						</p:column>
 						
+						<p:column>
+		   		<h:commandLink onclick="if (! confirm('Está seguro de borrar la casilla?')) return false"
+							value="x" action="#{gestionFormularios.borrarCas()}" update=":form" class="edit_icon" >
+
+								<f:param name="idCasDel" value="#{casilla.idCasilla}" />
+		
+							</h:commandLink> 	
+						
+						</p:column>
+						
 					
 			</p:dataTable>
    		</p:column>
@@ -114,7 +153,19 @@
 		
 		<p:column>
 			<h:form>
-				<h:commandLink  value="Editar formulario" action="/pages/modifForm.xhtml" update=":form">
+				<h:commandLink rendered="#{gestionFormularios.prepModif()}" value="Editar formulario" action="#{gestionFormularios.prerpModifForm()}" update=":form">
+					<f:param name="contador" value="#{forms.casillaNueva.size()}" />
+					<f:param name="nomFormModif" value="#{forms.nombre}" />
+					<f:param name="resumenFormModif" value="#{forms.resumen}" />
+					<f:param name="idForm" value="#{forms.id}" />
+					<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+2}">
+						<f:param name="modifcasId-${cas}" value="#{forms.casillaNueva[row.index].idCasilla}"/>
+						<f:param name="modifcasNom-${cas}" value="#{forms.casillaNueva[row.index].nombre}"/>
+						<f:param name="modifcasDesc-${cas}" value="#{forms.casillaNueva[row.index].descripcion}"/>
+						<f:param name="modifcasParam-${cas}" value="#{forms.casillaNueva[row.index].parametro}"/>
+						<f:param name="modifcasTipo-${cas}" value="#{forms.casillaNueva[row.index].tiposDato}"/>
+						<f:param name="modifcasUni-${cas}" value="#{forms.casillaNueva[row.index].unidadesMedida}"/>
+					</c:forEach>
 				</h:commandLink>			
 			</h:form>
 		</p:column>

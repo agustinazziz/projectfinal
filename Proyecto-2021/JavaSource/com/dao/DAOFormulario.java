@@ -58,7 +58,7 @@ try {
 	}
 }
 
-	public  void eliminarFormulario(Long idForm) throws Exception{ // Elimina de forma lógica
+	public  void eliminarFormulario(Long idForm) throws Exception{ 
 		try {
 			FormularioNuevo formDel = this.find(idForm);
 			em.remove(formDel);
