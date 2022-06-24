@@ -66,7 +66,7 @@
 			<h3>Datos del formulario selecionado</h3>
 			
 			<p:outputLabel value="Nombre: " />
-			<p:inputText style="margin-left:78px; width:140px;" value="#{gestionActividad.nombreForm}" disabled="true" /> 
+			<p:inputText style="margin-left:78px; width:140px;" value="#{gestionActividad.nombreForm}"  disabled="true"/> 
 			
 			<br/><br/>
 			
@@ -92,7 +92,7 @@
             		
             		<br></br>
             		<p:outputLabel value="Nombre: " />
-            		<p:inputText id="cExtra-${test}" disabled="true" value="#{gestionActividad.casillaNueva[row.index-1].nombre}"/>
+            		<p:inputText id="cExtra-${test}" value="#{gestionActividad.casillaNueva[row.index-1].nombre}"/>
             		
             		<br></br>
             		<p:outputLabel value="Descripción: " />

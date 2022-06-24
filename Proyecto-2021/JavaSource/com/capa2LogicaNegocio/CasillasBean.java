@@ -31,11 +31,10 @@ public class CasillasBean implements CasillasBeanRemote {
 
 
 	@Override
-	public void altaCasilla(String nom, String desc, String param, String tipoDato, String unuMedida) throws Exception {
+	public void altaCasilla(String nom, String desc, String param, String tipoDato, String unuMedida, FormularioNuevo formNuevo) throws Exception {
 		try {
 
-			daoCasillas.altaCasilla(nom, desc, param, tipoDato, unuMedida, em);
-			return;
+			daoCasillas.altaCasilla(nom, desc, param, tipoDato, unuMedida,formNuevo, em);
 
 		} catch (Exception e) {
 			throw new Exception("No se puede crear la casilla!");

@@ -12,6 +12,7 @@
 			<f:viewParam name="contador" value="#{gestionActividad.contadorString}"/>
 			<f:viewParam name="idForm" value="#{gestionActividad.idForm}"/>
 			<c:forEach varStatus="row" var="cas" begin="0" end="#{gestionActividad.casillaNueva.size()}">
+				<f:viewParam name="casId-${cas}" value="#{gestionActividad.casillaNueva[row.index].idCasilla}"/>
 				<f:viewParam name="casNom-${cas}" value="#{gestionActividad.casillaNueva[row.index].nombre}"/>
 				<f:viewParam name="casDesc-${cas}" value="#{gestionActividad.casillaNueva[row.index].descripcion}"/>
 				<f:viewParam name="casParam-${cas}" value="#{gestionActividad.casillaNueva[row.index].parametro}"/>
@@ -108,6 +109,7 @@
 				<f:param name="resumenForm" value="#{forms.resumen}" />
 				<f:param name="idForm" value="#{forms.id}" />
 				<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+2}">
+					<f:param name="casId-${cas}" value="#{forms.casillaNueva[row.index].idCasilla}"/>
 					<f:param name="casNom-${cas}" value="#{forms.casillaNueva[row.index].nombre}"/>
 					<f:param name="casDesc-${cas}" value="#{forms.casillaNueva[row.index].descripcion}"/>
 					<f:param name="casParam-${cas}" value="#{forms.casillaNueva[row.index].parametro}"/>

@@ -4,14 +4,13 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import com.entities.*;
+import com.exception.PersistenciaException;
 
 
 @Remote
 public interface FormulariosBeanRemote {
-	void insertarFormulario(String nombre, String resumen) throws Exception;
-	List<FormularioNuevo> listarFormularios();
+	List<FormularioNuevo> listarFormularios() throws PersistenciaException;
 	void eliminarFormulario(Long id);
 	FormularioNuevo buscarFormulario(Long id);
-	void AgregarCasillasFormulario(FormularioNuevo formulario);
-	void EditarFormulario(FormularioNuevo formulario);
+	void EditarFormulario(FormularioNuevo formulario) throws PersistenciaException;
 }

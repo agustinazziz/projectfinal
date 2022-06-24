@@ -32,7 +32,7 @@ public class DAOCasilla {
 		return resultados;
 	}
 	
-	public void altaCasilla(String nom, String desc, String param, String tipoDato, String unuMedida, EntityManager em)
+	public void altaCasilla(String nom, String desc, String param, String tipoDato, String unuMedida,FormularioNuevo formNuevo, EntityManager em)
 			throws Exception {
 
 		try {
@@ -43,6 +43,7 @@ public class DAOCasilla {
 			cas.setParametro(param);
 			cas.setTiposDato(tipoDato);
 			cas.setUnidadesMedida(unuMedida);
+			cas.setFormNuevo(formNuevo);
 			em.persist(cas);
 
 		} catch (Exception e) {
@@ -69,7 +70,7 @@ public class DAOCasilla {
 
 	public static CasillaNueva buscarCasilla(Long idCasi, EntityManager em) {
 		
-		TypedQuery<CasillaNueva> query= em.createQuery("SELECT f FROM CasillaNueva f WHERE f.idCasillaNueva=:idcas ", CasillaNueva.class).setParameter("idcas", idCasi);
+		TypedQuery<CasillaNueva> query= em.createQuery("SELECT c FROM CasillaNueva c WHERE c.idCasillaNueva=:idcas ", CasillaNueva.class).setParameter("idcas", idCasi);
 		CasillaNueva casBuscada= query.getSingleResult();
 		return casBuscada;
 		
