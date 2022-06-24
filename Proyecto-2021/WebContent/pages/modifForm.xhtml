@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition template="/layout/layout.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">
+		<c:set var="title" value="Datos de Formulario" scope="request" />
+	</ui:define>
+	
+	<ui:define name="content">
+			 
+
+			<h2>Modificación de Formulario</h2>
+	
+
+	<h:form id="idFormularios">
+		 
+		<p:messages id="messages" showDetail="true" closable="true">
+        	<p:autoUpdate />
+    	
+		
+		
+		
+		
+			
+		
+		<p:panelGrid columns="3">
+
+			
+			<p:outputLabel value="Nombre" />
+			<p:inputText style="margin-left:50px !important;"  id="nombre" disabled="false" value="#{gestionFormularios.nombreForm}" />
+			<p:message for="nombre" style="color:red" />
+			
+			<p:outputLabel value="Resumen" />
+			<p:inputTextarea style="width:150px; margin-left:50px !important;"  id="apellido" disabled="false" value="#{gestionFormularios.resumenForm}" />
+			<p:message for="apellido" style="color:red" />
+		</p:panelGrid>
+		
+			<br/><br/>
+			
+			
+			<br/><br/>	
+            	
+        <p:panelGrid columns="3">
+        
+				<c:forEach var="test"  begin="1" end="#{gestionFormularios.contador}" varStatus="row">
+            		
+            		<br></br>
+            		<p:outputLabel value=" Campo extra:${test}" />
+            		<br></br>
+            		
+            		<br></br>
+            		<p:outputLabel value="Nombre: " />
+            		<p:inputText id="cExtra-${test}" value="#{gestionFormularios.casillaNueva[row.index-1].nombre}"/>
+            		
+            		<br></br>
+            		<p:outputLabel value="Descripción: " />
+            		<p:inputText id="cExtra1-${test}" value="#{gestionFormularios.casillaNueva[row.index-1].descripcion}" />
+  
+            		<br></br>
+            		<p:outputLabel value="Parametro: " />            		
+            		<p:inputText id="cExtra2-${test}" value="#{gestionFormularios.casillaNueva[row.index-1].parametro}" />
+            		
+            		<br></br>
+            		<p:outputLabel value="Tipo de dato: " />            		
+            		<p:inputText id="cExtra3-${test}" value="#{gestionFormularios.casillaNueva[row.index-1].tiposDato}"/>
+
+            		<br></br>
+            		<p:outputLabel value="Unidad de medida: " />            	
+            		<p:inputText id="cExtra4-${test}" value="#{gestionFormularios.casillaNueva[row.index-1].unidadesMedida}" />
+            		<br></br>
+            		
+            		
+            	</c:forEach>
+
+		</p:panelGrid>
+		
+		<p:panelGrid columns= "3">
+
+			<br></br><br></br><br></br>
+
+			<h:commandButton value="Salvar cambios"	update=":form" action="#{gestionFormularios.modifForm()}"></h:commandButton>
+		</p:panelGrid>
+		
+		
+		</p:messages>
+
+
+	</h:form>
+
+			 
+			
+			 
+			 
+
+    </ui:define>
+</ui:composition>
+
