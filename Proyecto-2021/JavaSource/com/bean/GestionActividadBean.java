@@ -74,7 +74,8 @@ public class GestionActividadBean implements Serializable {
 
 //	METODOS  //
 
-	public void salvarCambios() throws Exception {
+	public String salvarCambios() throws Exception {
+		String redireccion="";
 //Conseguimos el usuario creador.
 		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
 //Instanciamos actividad nueva
@@ -90,26 +91,34 @@ public class GestionActividadBean implements Serializable {
 //Agregamos actividad
 			formActividad.addActividad(nuevaActividad);
 			formulariosBean.EditarFormulario(formActividad);
+			
+			if (formActividad.getCasillaNueva().size()!=0) {
+				for (CasillaNueva casillaModif : formActividad.getCasillaNueva()) {
 
-			for (CasillaNueva casillaModif : formActividad.getCasillaNueva()) {
+					casillaModif.setFormNuevo(formActividad);
+					try {
+						casillasBean.ModificarCasilla(casillaModif.getIdCasilla(), casillaModif.getNombre(),
+								casillaModif.getDescripcion(), casillaModif.getParametro(),
+								casillaModif.getUnidadesMedida(), casillaModif.getTiposDato(), casillaModif.getFormNuevo());
+					}catch (Exception e) {
+								casillasBean.altaCasilla(casillaModif.getNombre(),
+							  	casillaModif.getDescripcion(), casillaModif.getParametro(),
+							  	casillaModif.getTiposDato(),casillaModif.getUnidadesMedida(),
+							  	casillaModif.getFormNuevo());
+					}
 
-				casillaModif.setFormNuevo(formActividad);
-				try {
-					casillasBean.ModificarCasilla(casillaModif.getIdCasilla(), casillaModif.getNombre(),
-							casillaModif.getDescripcion(), casillaModif.getParametro(),
-							casillaModif.getUnidadesMedida(), casillaModif.getTiposDato(), casillaModif.getFormNuevo());
-				}catch (Exception e) {
-					  casillasBean.altaCasilla(casillaModif.getNombre(),
-					  casillaModif.getDescripcion(), casillaModif.getParametro(),
-					  casillaModif.getTiposDato(),casillaModif.getUnidadesMedida(),
-					  casillaModif.getFormNuevo());
+				
+					redireccion= "/pages/formularios.xhtml";
 				}
-
 			}
 
 		} catch (PersistenciaException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		this.prepCasillas();
+		
+		return redireccion;
 	}
 
 	public void addContador() {

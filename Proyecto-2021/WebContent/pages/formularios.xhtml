@@ -38,7 +38,7 @@
 	</h:form>
 
 	<h3><h:outputLabel value="Formularios seleccionados"/></h3>
-	<p:dataTable value="#{gestionFormularios.formsEncontrados}" var="forms" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
+	<p:dataTable id = "formulariosTable" value="#{gestionFormularios.formsEncontrados}" var="forms" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
    		   
    		   	<p:column  sortBy="#{forms.id}">
 			<f:facet name="header">ID</f:facet>    				
@@ -99,7 +99,7 @@
 			</p:dataTable>
    		</p:column>
 		
-						<p:column> 
+		<p:column> 
 			<f:facet name="header">Actividad</f:facet> 
 			<h:form>
 				
@@ -121,12 +121,12 @@
 			<br></br><br></br>
 			<h:link value="Ver" outcome="DatosUsuario.xhtml" />
 			</h:form>
-						</p:column>
-
+		</p:column>
 		
+		
+
 	</p:dataTable>
 
-    
     
     </ui:define>
 </ui:composition>
