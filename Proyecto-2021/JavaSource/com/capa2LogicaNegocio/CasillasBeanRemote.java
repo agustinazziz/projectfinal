@@ -13,5 +13,5 @@ public interface CasillasBeanRemote {
 	void altaCasilla(String nom,String desc, String param, String  tipoDato, String unuMedida, FormularioNuevo formNuevo) throws Exception ;
 	void ModificarCasilla(Long id,String nom,String des, String par,String uni, String tipDato,FormularioNuevo formNuevo);
 	CasillaNueva buscarCasilla(Long idCas);
-	void eliminarCasilla(Long idCas);
+	void eliminarCasilla(Long idCas) throws Exception;
 }

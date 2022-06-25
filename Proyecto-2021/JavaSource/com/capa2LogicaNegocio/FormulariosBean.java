@@ -1,11 +1,12 @@
 package com.capa2LogicaNegocio;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.dao.DAOFormulario;
 import com.entities.CasillaNueva;
@@ -18,7 +19,8 @@ import com.exception.PersistenciaException;
 @Stateless
 @LocalBean
 public class FormulariosBean implements FormulariosBeanRemote{
-
+	@PersistenceContext
+	private EntityManager em;
 
 
 	

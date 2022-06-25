@@ -3,6 +3,7 @@
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +17,7 @@ import com.exception.PersistenciaException;
  * Session Bean implementation class CasillasBean
  */
 @Stateless
+@LocalBean
 public class CasillasBean implements CasillasBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
@@ -28,7 +30,6 @@ public class CasillasBean implements CasillasBeanRemote {
 	}
 
 
-	@Override
 	public void altaCasilla(String nom, String desc, String param, String tipoDato, String unuMedida, FormularioNuevo formNuevo) throws Exception {
 		try {
 
@@ -39,14 +40,12 @@ public class CasillasBean implements CasillasBeanRemote {
 		}
 	}	
 
-	@Override
 	public void ModificarCasilla(Long id,String nom,String des, String par,String uni, String tipDato,FormularioNuevo formNuevo) {
 	
 		daoCasillas.modificarCasilla( id,nom, des, par,uni, tipDato, formNuevo);
 		
 	}
 
-	@Override
 	public CasillaNueva buscarCasilla(Long idCas) {
 		
 		return daoCasillas.buscarCasilla(idCas);
@@ -54,17 +53,17 @@ public class CasillasBean implements CasillasBeanRemote {
 	}
 
 
-	@Override
+	
 	public List<CasillaNueva> listarCasillas() {
 		return daoCasillas.listarCasillas();
 	}
+
 	
-	@Override
-	public void eliminarCasilla(Long idCas) {
+	public void eliminarCasilla(Long idCas) throws Exception {
 		
 		try {
 			daoCasillas.eliminarCasilla(idCas);;
-		} catch (Exception e) {
+		} catch (PersistenciaException e) {
 			e.printStackTrace();
 		}
 		

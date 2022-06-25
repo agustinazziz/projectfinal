@@ -25,8 +25,9 @@
 				<f:viewParam name="casTipo-${cas}" value="#{gestionActividad.casillaNueva[row.index].tiposDato}"/>
 				<f:viewParam name="casUni-${cas}" value="#{gestionActividad.casillaNueva[row.index].unidadesMedida}"/>
 			</c:forEach>
-			<f:viewParam name="idFormDel" value="#{gestionFormularios.idForm}"/>
+			
 			<f:viewParam name="idCasDel" value="#{gestionFormularios.idCasDel}"/>
+			<f:viewParam name="idFormDel" value="#{gestionFormularios.idForm}"/>
 			<f:viewParam name="nomFormModif" value="#{gestionFormularios.nombreForm}"/>
 			<f:viewParam name="resumenFormModif" value="#{gestionFormularios.resumenForm}"/>
 			<f:viewParam name="contador" value="#{gestionFormularios.contadorString}"/>
@@ -103,13 +104,14 @@
 						</p:column>
 						
 						<p:column>
-		   		<h:commandLink onclick="if (! confirm('Está seguro de borrar la casilla?')) return false"
-							value="x" action="#{gestionFormularios.borrarCas()}" update=":form" class="edit_icon" >
-
-								<f:param name="idCasDel" value="#{casilla.idCasilla}" />
-		
-							</h:commandLink> 	
-						
+							<h:form>
+		   						<h:commandLink onclick="if (! confirm('Está seguro de borrar la casilla?')) return false"
+								value="x" action="#{gestionFormularios.borrarCas()}" update=":form" class="edit_icon" >
+										
+										<f:param name="idCasDel" value="#{casilla.idCasilla}" />
+								
+								</h:commandLink> 	
+						</h:form>
 						</p:column>
 						
 					

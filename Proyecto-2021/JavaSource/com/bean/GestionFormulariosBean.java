@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
-import com.capa2LogicaNegocio.CasillasBeanRemote;
+import com.capa2LogicaNegocio.CasillasBean;
 import com.capa2LogicaNegocio.FormulariosBean;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
@@ -29,7 +29,7 @@ public class GestionFormulariosBean implements Serializable{
 	@EJB
 	FormulariosBean formulariosBean;
 	@EJB
-	CasillasBeanRemote casillasBean;
+	CasillasBean casillasBean;
 
 	List <FormularioNuevo> formsEncontrados;
 	
@@ -164,12 +164,11 @@ public class GestionFormulariosBean implements Serializable{
 	
 	public void borrarCas() throws Exception {
 		try {
+			
 			casillasBean.eliminarCasilla(Long.parseLong(idCasDel));
 			addMessage("Casilla borrada correctamente", "Casilla Borrasa");
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.print(e.getMessage());
-			System.out.print(e.getCause());
+		}	catch(Exception e) {
+			System.out.println("No se puede borrar casilla.");
 		}
 	}
 	

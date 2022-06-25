@@ -71,7 +71,7 @@ public class DAOCasilla {
 	public  CasillaNueva buscarCasilla(Long idCasi) {
 		
 		TypedQuery<CasillaNueva> query= em.createQuery("SELECT c FROM CasillaNueva c WHERE c.idCasillaNueva=:idcas ", CasillaNueva.class).setParameter("idcas", idCasi);
-		CasillaNueva casBuscada= query.getSingleResult();
+		CasillaNueva casBuscada= (CasillaNueva)query.getSingleResult();
 		return casBuscada;
 		
 	}
@@ -98,10 +98,33 @@ public void altaCasillaClase(CasillaNueva casillaNueva) throws PersistenciaExcep
 
 public void eliminarCasilla(Long idCas) throws Exception{ 
 	try {
-		CasillaNueva casDel = buscarCasilla(idCas);
-		em.remove(casDel);
+		TypedQuery<FormularioNuevo> query= em.createQuery("SELECT f FROM FormularioNuevo f JOIN f.casillaNueva c WHERE c.idCasillaNueva =:idcas", FormularioNuevo.class).setParameter("idcas", idCas );
+		FormularioNuevo casFormDel = query.getSingleResult();
+		String idCasString = idCas.toString();
+		Long idCasLong;
+		String idCasStringDel;
+		for (Integer i = 0; i < casFormDel.getCasillaNueva().size()+1; i++){
+			idCasLong= casFormDel.getCasillaNueva().get(i).getIdCasilla();
+			idCasStringDel=idCasLong.toString();
+			
+			if(idCasStringDel.equals(idCasString)) {
+				casFormDel.getCasillaNueva().remove(i+1-1);
+				CasillaNueva casDel = em.find(CasillaNueva.class, idCas);
+				em.remove(casDel);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+			
 		em.flush();																									// atributo
 	} catch (Exception e) {
+		System.out.println(e.getMessage());
 		throw new Exception("No se puede eliminar la casilla");
 	}
 																										// status a
