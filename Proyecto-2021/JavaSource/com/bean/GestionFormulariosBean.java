@@ -154,6 +154,7 @@ public class GestionFormulariosBean implements Serializable{
 		try {
 			formulariosBean.eliminarFormulario(Long.parseLong(idForm));
 			addMessage("Formulario borrado correctamente", "Formulario Borrado");
+			idForm=null;
 		} catch (PersistenciaException e) {
 			e.printStackTrace();
 		}
@@ -275,7 +276,7 @@ public class GestionFormulariosBean implements Serializable{
 	}
 	
 	public void delContador() {
-		if (contador >=contador) {
+		if (contador > 0) {
 			contador=contador -1;
 			casillaNueva.remove(contador+1-1);
 

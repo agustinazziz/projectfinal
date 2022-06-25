@@ -53,9 +53,9 @@ public class DAOCasilla {
 	}
 	
 
-	public static void modificarCasilla(Long idCas, String nom, String des, String par,String uni, String tipDato,FormularioNuevo formNuevo,EntityManager em) {
+	public void modificarCasilla(Long idCas, String nom, String des, String par,String uni, String tipDato,FormularioNuevo formNuevo) {
 		
-		CasillaNueva casBuscada= buscarCasilla(idCas, em);
+		CasillaNueva casBuscada= buscarCasilla(idCas);
 		
 		casBuscada.setNombre(nom);
 		casBuscada.setDescripcion(des);
@@ -68,7 +68,7 @@ public class DAOCasilla {
 		
 	}
 
-	public static CasillaNueva buscarCasilla(Long idCasi, EntityManager em) {
+	public  CasillaNueva buscarCasilla(Long idCasi) {
 		
 		TypedQuery<CasillaNueva> query= em.createQuery("SELECT c FROM CasillaNueva c WHERE c.idCasillaNueva=:idcas ", CasillaNueva.class).setParameter("idcas", idCasi);
 		CasillaNueva casBuscada= query.getSingleResult();
@@ -96,13 +96,13 @@ public void altaCasillaClase(CasillaNueva casillaNueva) throws PersistenciaExcep
 
 }
 
-public static void eliminarCasilla(Long idCas, EntityManager em) throws Exception{ 
+public void eliminarCasilla(Long idCas) throws Exception{ 
 	try {
-		CasillaNueva casDel = buscarCasilla(idCas, em);
+		CasillaNueva casDel = buscarCasilla(idCas);
 		em.remove(casDel);
 		em.flush();																									// atributo
 	} catch (Exception e) {
-		e.printStackTrace();
+		throw new Exception("No se puede eliminar la casilla");
 	}
 																										// status a
 																										// 0.
