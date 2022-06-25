@@ -3,6 +3,7 @@
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,11 +11,13 @@ import javax.persistence.PersistenceContext;
 import com.dao.DAOCasilla;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
+import com.exception.PersistenciaException;
 
 /**
  * Session Bean implementation class CasillasBean
  */
 @Stateless
+@LocalBean
 public class CasillasBean implements CasillasBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
@@ -22,15 +25,11 @@ public class CasillasBean implements CasillasBeanRemote {
 	@EJB
 	DAOCasilla daoCasillas;
 
-	/**
-	 * Default constructor.
-	 */
 	public CasillasBean() {
 		daoCasillas = new DAOCasilla();
 	}
 
 
-	@Override
 	public void altaCasilla(String nom, String desc, String param, String tipoDato, String unuMedida, FormularioNuevo formNuevo) throws Exception {
 		try {
 
@@ -41,25 +40,33 @@ public class CasillasBean implements CasillasBeanRemote {
 		}
 	}	
 
-	@Override
 	public void ModificarCasilla(Long id,String nom,String des, String par,String uni, String tipDato,FormularioNuevo formNuevo) {
 	
-		DAOCasilla.modificarCasilla( id,nom, des, par,uni, tipDato, formNuevo, em);
+		daoCasillas.modificarCasilla( id,nom, des, par,uni, tipDato, formNuevo);
 		
 	}
 
-	@Override
 	public CasillaNueva buscarCasilla(Long idCas) {
 		
-		return DAOCasilla.buscarCasilla(idCas, em);
+		return daoCasillas.buscarCasilla(idCas);
 		
 	}
 
 
-	@Override
+	
 	public List<CasillaNueva> listarCasillas() {
 		return daoCasillas.listarCasillas();
 	}
 
+	
+	public void eliminarCasilla(Long idCas) throws Exception {
+		
+		try {
+			daoCasillas.eliminarCasilla(idCas);;
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }

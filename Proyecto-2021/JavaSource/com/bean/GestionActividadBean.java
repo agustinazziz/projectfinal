@@ -108,6 +108,15 @@ public class GestionActividadBean implements Serializable {
 					}
 
 				
+					caracteristica=null;
+					fechaIni=null;
+					fechaFin=null;
+					metodoMuestreo=null;
+					tipoMuestreo=null;
+					latitud=null;
+					longitud=null;
+					usuarioCreador=null;
+					formActividad=null;					
 					redireccion= "/pages/formularios.xhtml";
 				}
 			}

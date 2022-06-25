@@ -34,7 +34,7 @@
         
         <p:submenu label="Gestion de Formularios" icon="ui-icon-document" rendered ="#{gestionUsuarios.rolExperto()}">
           <p:menuitem value="Seleccion de formulario"   action="#{gestionActividad.prepCasillas()}" /> 
-          <p:menuitem value="Nuevo Formulario" outcome="/pages/NewFormulario.xhtml"   /> 	 
+          <p:menuitem value="Nuevo Formulario" action="#{gestionFormularios.prepCrearForm()}"   /> 	 
         </p:submenu>
         <p:submenu label="Gestion de Actividades" icon="ui-icon-document">
             <p:menuitem value="Seleccion de Actividades por fecha"   outcome="/pages/Actividades.xhtml"  /> 
