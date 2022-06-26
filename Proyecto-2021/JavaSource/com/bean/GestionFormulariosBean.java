@@ -132,8 +132,6 @@ public class GestionFormulariosBean implements Serializable{
 				
 			}
 			
-			
-			
 			System.out.println("Llega bien hasta acá");
 			
 			return "/pages/formularios.xhtml";
