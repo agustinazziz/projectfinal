@@ -140,6 +140,19 @@ public class UsuarioEmpresa implements Serializable {
 		return activo;
 	}
 
+	public void addActividad(Actividad actividad) {
+		
+		this.actividad.add(actividad);
+	}
+	
+	public List<Actividad> getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(List<Actividad> actividad) {
+		this.actividad = actividad;
+	}
+
 	public void setActivo(String activo) {
 		this.activo = activo;
 	}

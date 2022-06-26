@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import com.entities.Actividad;
+import com.entities.CasillaNueva;
 
 @Remote
 public interface ActividadBeanRemote {
@@ -14,6 +15,8 @@ public interface ActividadBeanRemote {
 	Actividad buscarActividad(Actividad actividad) throws Exception;
 
 	Actividad modificarActividad(Actividad actividad) throws Exception;
+	
+	List<CasillaNueva> buscarCasillaFormId (Long idForm);
 	
 	List<Actividad> listarActividades();
 

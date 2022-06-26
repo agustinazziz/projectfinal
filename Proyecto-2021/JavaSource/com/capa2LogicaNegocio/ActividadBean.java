@@ -11,6 +11,7 @@ import javax.persistence.PersistenceException;
 
 import com.dao.DAOActividad;
 import com.entities.Actividad;
+import com.entities.CasillaNueva;
 
 @Stateless
 public class ActividadBean implements ActividadBeanRemote{
@@ -53,5 +54,9 @@ public class ActividadBean implements ActividadBeanRemote{
 	public List<Actividad> listarActividades(){
 		
 		return daoActividad.listarActividades();
+	}
+	
+	public List<CasillaNueva> buscarCasillaFormId (Long idForm){
+		return daoActividad.buscarCasillasFormid(idForm);
 	}
 }

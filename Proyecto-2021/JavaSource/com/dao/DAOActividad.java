@@ -10,6 +10,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Actividad;
+import com.entities.CasillaNueva;
+import com.entities.FormularioNuevo;
 
 
 
@@ -71,6 +73,12 @@ public class DAOActividad {
 		TypedQuery<Actividad> query = em.createQuery("SELECT a FROM Actividad a", Actividad.class);
 		List<Actividad> actBuscadas= query.getResultList();
 		return actBuscadas;
+	}
+	
+	public List<CasillaNueva> buscarCasillasFormid (Long idForm){
+		TypedQuery<CasillaNueva> query= em.createQuery("SELECT c FROM CasillaNueva c JOIN c.formNuevo f WHERE f.id =:idForm", CasillaNueva.class).setParameter("idForm", idForm);
+		List<CasillaNueva> listaCasillas = query.getResultList();
+		return listaCasillas;
 	}
 	
 	

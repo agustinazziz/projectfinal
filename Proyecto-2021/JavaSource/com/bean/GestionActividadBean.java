@@ -81,9 +81,14 @@ public class GestionActividadBean implements Serializable {
 	public String salvarCambios() throws Exception {
 		
 		formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
-
+		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
+		
+		
 		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo, latitud, longitud, usuarioCreador, formActividad);
-
+		
+		usuarioCreador.addActividad(nuevaActividad);
+		
+		
 		actividadBean.agregarActividad(nuevaActividad);
 		
 		for (Integer i = 0 ; i <= contador-1 ; i++) {
@@ -123,6 +128,10 @@ public class GestionActividadBean implements Serializable {
 		return "/pages/formularios.xhtml";
 	}
 	
+	public List<CasillaNueva> buscarCasillaFormId(Long idForm){
+		return actividadBean.buscarCasillaFormId(idForm);
+	}
+	
 	public List<Actividad> buscarActividades() {
 		listadoActividad= actividadBean.listarActividades();		
 		return listadoActividad;
@@ -155,6 +164,7 @@ public class GestionActividadBean implements Serializable {
 	}
 	
 	public String prepCasillas() {
+			casillaNueva.clear();
 		for (Integer i = 0; i < 10; i++) {
 			CasillaNueva casillaAux = new CasillaNueva();
 			casillaNueva.add(casillaAux);
