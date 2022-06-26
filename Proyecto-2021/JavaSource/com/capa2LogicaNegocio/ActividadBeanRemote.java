@@ -1,5 +1,7 @@
 package com.capa2LogicaNegocio;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import com.entities.Actividad;
@@ -13,5 +15,6 @@ public interface ActividadBeanRemote {
 
 	Actividad modificarActividad(Actividad actividad) throws Exception;
 	
+	List<Actividad> listarActividades();
 
 }

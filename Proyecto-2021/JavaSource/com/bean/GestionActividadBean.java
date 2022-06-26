@@ -15,6 +15,7 @@ import com.capa2LogicaNegocio.ActividadBeanRemote;
 import com.capa2LogicaNegocio.CasillasBeanRemote;
 import com.capa2LogicaNegocio.FormulariosBeanRemote;
 import com.capa2LogicaNegocio.GestionUsuarioService;
+import com.capa2LogicaNegocio.Usuario;
 import com.entities.Actividad;
 import com.entities.CasillaNueva;
 import com.entities.FormularioNuevo;
@@ -73,72 +74,51 @@ public class GestionActividadBean implements Serializable {
 	Integer controladorContador = 0;
 
 	List<CasillaNueva> casillaNueva = new ArrayList<CasillaNueva>();
+	List<Actividad> listadoActividad = new ArrayList<Actividad>();
 
 //	METODOS  //
 
 	public String salvarCambios() throws Exception {
 		String redireccion="";
-//Conseguimos el usuario creador.
-		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
-//Buscamos el form 
-		formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
-//Instanciamos actividad nueva
-		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo,
-				usuarioCreador, formActividad);
-		try {
-			
-//Alta de actividad
-			actividadBean.agregarActividad(nuevaActividad);
-			addMessage("Actividad crada satisfactoriamente", "Actividad creada");
-
-//Seteamos lista de casillas
-			formActividad.setCasillaNueva(casillaNueva);
-//Agregamos actividad
-			formActividad.addActividad(nuevaActividad);
-			formulariosBean.EditarFormulario(formActividad);
-			
-			if (formActividad.getCasillaNueva().size()!=0) {
-				for (CasillaNueva casillaModif : formActividad.getCasillaNueva()) {
-
-					casillaModif.setFormNuevo(formActividad);
-					try {
-						casillasBean.ModificarCasilla(casillaModif.getIdCasilla(), casillaModif.getNombre(),
-								casillaModif.getDescripcion(), casillaModif.getParametro(),
-								casillaModif.getUnidadesMedida(), casillaModif.getTiposDato(), casillaModif.getFormNuevo());
-								addMessage("Casilla modificada satisfactoriamente", "Casilla modificada");
-
-					}catch (Exception e) {
-								casillasBean.altaCasilla(casillaModif.getNombre(),
-														 casillaModif.getDescripcion(), casillaModif.getParametro(),
-														 casillaModif.getTiposDato(),casillaModif.getUnidadesMedida(),
-														 casillaModif.getFormNuevo());
-								addMessage("Casilla creada satisfactoriamente", "Casilla creada");
-
-					}
-				
-					caracteristica=null;
-					fechaIni=null;
-					fechaFin=null;
-					metodoMuestreo=null;
-					tipoMuestreo=null;
-					latitud=null;
-					longitud=null;
-					usuarioCreador=null;
-					formActividad=null;					
-					redireccion= "/pages/formularios.xhtml";
-				}
-			}
-
-		} catch (PersistenciaException e) {
-			System.out.println(e.getMessage());
-		}
 		
-		this.prepCasillas();
+		formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
+
+		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo, latitud, longitud, usuarioCreador, formActividad);
+
+		actividadBean.agregarActividad(nuevaActividad);
+		
+		for (Integer i = 0 ; i <= contador-1 ; i++) {
+			try {
+				casillasBean.ModificarCasilla(casillaNueva.get(i).getIdCasilla(), casillaNueva.get(i).getNombre(),
+											  casillaNueva.get(i).getDescripcion(),
+											  casillaNueva.get(i).getParametro(),
+											  casillaNueva.get(i).getUnidadesMedida(),
+											  casillaNueva.get(i).getTiposDato(),
+											  formActividad);
+				
+			}catch(Exception e) {
+				casillasBean.altaCasilla(casillaNueva.get(i).getNombre(),
+										 casillaNueva.get(i).getDescripcion(),
+										 casillaNueva.get(i).getParametro(),
+										 casillaNueva.get(i).getUnidadesMedida(),
+										 casillaNueva.get(i).getTiposDato(),
+										 formActividad);
+				
+			
+			}
+			
+			
+		}
 		
 		return redireccion;
 	}
 	
-    public void addMessage(String summary, String detail) {
+	public List<Actividad> buscarActividades() {
+		listadoActividad= actividadBean.listarActividades();		
+		return listadoActividad;
+	}
+  
+	public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -206,6 +186,16 @@ public class GestionActividadBean implements Serializable {
 
 	public void setUsuarioActividad(String usuarioActividad) {
 		this.usuarioActividad = usuarioActividad;
+	}
+	
+	
+	
+	public List<Actividad> getListadoActividad() {
+		return listadoActividad;
+	}
+
+	public void setListadoActividad(List<Actividad> listadoActividad) {
+		this.listadoActividad = listadoActividad;
 	}
 
 	public String getContraseñaActividad() {

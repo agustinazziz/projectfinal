@@ -1,6 +1,8 @@
 package com.capa2LogicaNegocio;
 
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,5 +48,10 @@ public class ActividadBean implements ActividadBeanRemote{
 	@Override
 	public Actividad modificarActividad (Actividad actividad) throws Exception {
 		return daoActividad.modificarActividad(actividad);
+	}
+	
+	public List<Actividad> listarActividades(){
+		
+		return daoActividad.listarActividades();
 	}
 }

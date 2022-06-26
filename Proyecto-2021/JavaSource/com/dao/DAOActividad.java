@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -63,6 +65,12 @@ public class DAOActividad {
 		TypedQuery<Actividad> query = em.createQuery("SELECT a FROM Actividad a WHERE a.idActividad=:idActividad", Actividad.class);
 		Actividad actBuscada= query.getSingleResult();
 		return actBuscada;
+	}
+	
+	public List<Actividad> listarActividades () {
+		TypedQuery<Actividad> query = em.createQuery("SELECT a FROM Actividad a", Actividad.class);
+		List<Actividad> actBuscadas= query.getResultList();
+		return actBuscadas;
 	}
 	
 	

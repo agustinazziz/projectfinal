@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition template="/layout/layout.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<ui:define name="title">
+		<c:set var="title" value="Gestion de Formularios" scope="request" />
+	</ui:define>
+	<ui:define name="content">
+	
+
+
+		<h:form>
+		
+
+		
+		<h:commandButton value="Buscar"	action="#{gestionActividad.buscarActividades()}" />
+				
+	</h:form>
+
+	<h3><h:outputLabel value="Actividades encontradas"/></h3>
+	<p:dataTable id = "formulariosTable" value="#{gestionActividad.listadoActividad}" var="act" tableStyle="width:auto" styleClass = "employeeTable" headerClass = "employeeTableHeader">
+   		   
+   		   	<p:column  sortBy="#{act.idActividad}">
+			<f:facet name="header">ID</f:facet>    				
+      		#{act.idActividad}
+   		</p:column>
+   		
+   		<p:column sortBy="#{act.caracteristica}">
+			<f:facet name="header">Caracteristica</f:facet>
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.caracteristica}"/>
+		</p:column>
+		
+   		<p:column editable="true" sortBy="#{act.fechaIni}">
+				<f:facet name="header">Fecha inicio</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.fechaIni}"/>
+   		</p:column>
+   		
+   		<p:column editable="true" sortBy="#{act.fechaFin}">
+				<f:facet name="header">Fecha inicio</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.fechaFin}"/>
+   		</p:column>   
+   		
+   		<p:column editable="true" sortBy="#{act.tipoMuestreo}">
+				<f:facet name="header">Tipo muestreo</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.tipoMuestreo}"/>
+   		</p:column>		
+   		
+   		<p:column editable="true" sortBy="#{act.metodoMuestreo}">
+				<f:facet name="header">Metodo muestreo</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.metodoMuestreo}"/>
+   		</p:column>  
+   		
+   		<p:column editable="true" sortBy="#{act.latitud}">
+				<f:facet name="header">Latitud</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.latitud}"/>
+   		</p:column>
+
+   		<p:column editable="true" sortBy="#{act.longitud}">
+				<f:facet name="header">Longitud</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.longitud}"/>
+   		</p:column>
+   		
+   		<p:column editable="true" sortBy="#{act.formActividad.nombre}">
+				<f:facet name="header">Formulario asignado</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.formActividad.nombre}"/>
+   		</p:column>
+   		
+   		<p:column editable="true" sortBy="#{act.usuarioCreador.usuarioCuenta}">
+				<f:facet name="header">Usuario Creador</f:facet>    				
+                <h:outputText style="min-width:80px;white-space: normal !important;" value="#{act.usuarioCreador}"/>
+   		</p:column>
+
+   		 		
+   		<p:column>
+			   		<f:facet name="header"> Casillas Extra </f:facet>
+			   									
+			   									
+   			<p:dataTable tableStyle="width:auto" value="#{act.formActividad.casillaNueva}" var="casilla" >
+				
+				
+						<p:column > 
+							<f:facet name="header">Nombre</f:facet> 
+						
+								 #{casilla.nombre}	<br></br>	
+							
+						</p:column>
+						
+						<p:column> 
+							<f:facet name="header">Descripción</f:facet> 	
+								#{casilla.descripcion}
+						</p:column>
+						
+						<p:column> 
+							<f:facet name="header">Parametro</f:facet> 	
+								#{casilla.parametro}		
+						</p:column>
+						
+						<p:column> 
+							<f:facet name="header">Tipo de dato</f:facet> 	
+								#{casilla.tiposDato}		
+						</p:column>
+						
+						<p:column> 
+							<f:facet name="header">Unidad de medida</f:facet> 	
+								#{casilla.unidadesMedida}		
+						</p:column>
+						
+						
+					
+			</p:dataTable>
+   		</p:column>
+		
+		
+
+	</p:dataTable>
+
+    
+    </ui:define>
+</ui:composition>

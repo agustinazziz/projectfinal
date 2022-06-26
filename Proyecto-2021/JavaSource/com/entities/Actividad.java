@@ -74,6 +74,24 @@ public class Actividad implements Serializable {
 	
 	
 	public Actividad(String caracteristica, Date fechaIni, Date fechaFin, String metodoMuestreo, String tipoMuestreo,
+			Integer latitud, Integer longitud, UsuarioEmpresa usuarioCreador, FormularioNuevo formActividad) {
+		super();
+		this.caracteristica = caracteristica;
+		this.fechaIni = fechaIni;
+		this.fechaFin = fechaFin;
+		this.metodoMuestreo = metodoMuestreo;
+		this.tipoMuestreo = tipoMuestreo;
+		this.latitud = latitud;
+		this.longitud = longitud;
+		this.usuarioCreador = usuarioCreador;
+		this.formActividad = formActividad;
+	}
+
+
+
+
+
+	public Actividad(String caracteristica, Date fechaIni, Date fechaFin, String metodoMuestreo, String tipoMuestreo,
 			UsuarioEmpresa usuarioCreador, FormularioNuevo formActividad) {
 		super();
 		this.caracteristica = caracteristica;
