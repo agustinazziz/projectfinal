@@ -115,7 +115,6 @@ public class GestionActividadBean implements Serializable {
 								addMessage("Casilla creada satisfactoriamente", "Casilla creada");
 
 					}
-
 				
 					caracteristica=null;
 					fechaIni=null;
