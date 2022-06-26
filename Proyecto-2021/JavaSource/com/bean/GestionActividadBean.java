@@ -86,6 +86,7 @@ public class GestionActividadBean implements Serializable {
 		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo,
 				usuarioCreador, formActividad);
 		try {
+			
 //Alta de actividad
 			actividadBean.agregarActividad(nuevaActividad);
 			addMessage("Actividad crada satisfactoriamente", "Actividad creada");
