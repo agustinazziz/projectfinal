@@ -194,6 +194,7 @@ public class GestionFormulariosBean implements Serializable{
 			
 			casillasBean.eliminarCasilla(Long.parseLong(idCasDel));
 			addMessage("Casilla borrada correctamente", "Casilla Borrasa");
+			
 		}	catch(Exception e) {
 			System.out.println("No se puede borrar casilla.");
 		}

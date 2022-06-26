@@ -79,7 +79,6 @@ public class GestionActividadBean implements Serializable {
 //	METODOS  //
 
 	public String salvarCambios() throws Exception {
-		String redireccion="";
 		
 		formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 
@@ -89,7 +88,8 @@ public class GestionActividadBean implements Serializable {
 		
 		for (Integer i = 0 ; i <= contador-1 ; i++) {
 			try {
-				casillasBean.ModificarCasilla(casillaNueva.get(i).getIdCasilla(), casillaNueva.get(i).getNombre(),
+				casillasBean.ModificarCasilla(casillaNueva.get(i).getIdCasilla(),
+											  casillaNueva.get(i).getNombre(),
 											  casillaNueva.get(i).getDescripcion(),
 											  casillaNueva.get(i).getParametro(),
 											  casillaNueva.get(i).getUnidadesMedida(),
@@ -110,7 +110,17 @@ public class GestionActividadBean implements Serializable {
 			
 		}
 		
-		return redireccion;
+		caracteristica=null;
+		fechaIni=null;
+		fechaFin=null;
+		metodoMuestreo=null;
+		tipoMuestreo=null;
+		latitud=null;
+		longitud=null;
+		usuarioCreador=null;
+		formActividad=null;
+		
+		return "/pages/formularios.xhtml";
 	}
 	
 	public List<Actividad> buscarActividades() {
@@ -135,7 +145,15 @@ public class GestionActividadBean implements Serializable {
 			casillaNueva.remove(contador + 1 - 1);
 		}
 	}
-
+	
+	public String prepModif() {
+		for (Integer i = 0; i < 10; i++) {
+			CasillaNueva casillaAux = new CasillaNueva();
+			casillaNueva.add(casillaAux);
+		}
+		return"true";
+	}
+	
 	public String prepCasillas() {
 		for (Integer i = 0; i < 10; i++) {
 			CasillaNueva casillaAux = new CasillaNueva();

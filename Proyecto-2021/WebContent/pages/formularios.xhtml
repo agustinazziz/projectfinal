@@ -123,12 +123,12 @@
 			<f:facet name="header">Actividad</f:facet> 
 			<h:form>
 				
-			<h:commandLink  value="Crear" action="#{gestionActividad.modifContador()}" update=":form">
+			<h:commandLink rendered="#{gestionActividad.prepModif()}" value="Crear" action="#{gestionActividad.modifContador()}" update=":form">
 				<f:param name="contador" value="#{forms.casillaNueva.size()}" />
 				<f:param name="nomForm" value="#{forms.nombre}" />
 				<f:param name="resumenForm" value="#{forms.resumen}" />
 				<f:param name="idForm" value="#{forms.id}" />
-				<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+2}">
+				<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+100}">
 					<f:param name="casId-${cas}" value="#{forms.casillaNueva[row.index].idCasilla}"/>
 					<f:param name="casNom-${cas}" value="#{forms.casillaNueva[row.index].nombre}"/>
 					<f:param name="casDesc-${cas}" value="#{forms.casillaNueva[row.index].descripcion}"/>
@@ -162,7 +162,7 @@
 					<f:param name="nomFormModif" value="#{forms.nombre}" />
 					<f:param name="resumenFormModif" value="#{forms.resumen}" />
 					<f:param name="idFormModif" value="#{forms.id}" />
-					<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+2}">
+					<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+100}">
 						<f:param name="modifcasId-${cas}" value="#{forms.casillaNueva[row.index].idCasilla}"/>
 						<f:param name="modifcasNom-${cas}" value="#{forms.casillaNueva[row.index].nombre}"/>
 						<f:param name="modifcasDesc-${cas}" value="#{forms.casillaNueva[row.index].descripcion}"/>
