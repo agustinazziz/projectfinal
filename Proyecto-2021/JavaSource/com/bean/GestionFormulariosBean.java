@@ -100,14 +100,19 @@ public class GestionFormulariosBean implements Serializable{
 		return"true";
 	}
 	
-	public void modifForm() throws Exception {
+	public String modifForm() throws Exception {
 		try {
 			FormularioNuevo formModif = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 			formModif.setNombre(nombreForm);
 			formModif.setResumen(resumenForm);
 			formulariosBean.EditarFormulario(formModif);
 			
+			System.out.println(idCasDel);
+			System.out.println();
+			
 			System.out.println("Llega bien hasta acá");
+			
+			rerturn "/pages/formularios.xhtml";
 		}catch(PersistenciaException e) {
 			e.printStackTrace();
 		}
