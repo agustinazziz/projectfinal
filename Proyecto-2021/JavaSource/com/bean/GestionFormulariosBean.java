@@ -102,7 +102,9 @@ public class GestionFormulariosBean implements Serializable{
 	
 	public void modifForm() throws Exception {
 		try {
+
 			FormularioNuevo formModif = formulariosBean.buscarFormulario(Long.parseLong(idForm));
+			
 			formModif.setNombre(nombreForm);
 			formModif.setResumen(resumenForm);
 			formulariosBean.EditarFormulario(formModif);

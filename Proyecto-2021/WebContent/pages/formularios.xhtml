@@ -26,6 +26,8 @@
 				<f:viewParam name="casUni-${cas}" value="#{gestionActividad.casillaNueva[row.index].unidadesMedida}"/>
 			</c:forEach>
 			
+			
+		
 			<f:viewParam name="idCasDel" value="#{gestionFormularios.idCasDel}"/>
 			<f:viewParam name="idFormDel" value="#{gestionFormularios.idForm}"/>
 			<f:viewParam name="nomFormModif" value="#{gestionFormularios.nombreForm}"/>
@@ -160,7 +162,7 @@
 					<f:param name="contador" value="#{forms.casillaNueva.size()}" />
 					<f:param name="nomFormModif" value="#{forms.nombre}" />
 					<f:param name="resumenFormModif" value="#{forms.resumen}" />
-					<f:param name="idForm" value="#{forms.id}" />
+					<f:param name="idFormModif" value="#{forms.id}" />
 					<c:forEach varStatus="row" var="cas" begin="0" end="#{forms.casillaNueva.size()+2}">
 						<f:param name="modifcasId-${cas}" value="#{forms.casillaNueva[row.index].idCasilla}"/>
 						<f:param name="modifcasNom-${cas}" value="#{forms.casillaNueva[row.index].nombre}"/>
