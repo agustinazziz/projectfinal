@@ -84,12 +84,12 @@ public class GestionActividadBean implements Serializable {
 		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo,
 				usuarioCreador, formActividad);
 		try {
+			
+//Buscamos el form 
+			formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 //Alta de actividad
 			actividadBean.agregarActividad(nuevaActividad);
 			addMessage("Actividad crada satisfactoriamente", "Actividad creada");
-
-//Buscamos el form 
-			formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 //Seteamos lista de casillas
 			formActividad.setCasillaNueva(casillaNueva);
 //Agregamos actividad
