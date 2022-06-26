@@ -120,7 +120,6 @@ public class GestionFormulariosBean implements Serializable{
 	}
 	
 	
-	
 	public String prerpModifForm() {
 		
 		contador = Integer.parseInt(contadorString);
