@@ -39,6 +39,7 @@ public class GestionFormulariosBean implements Serializable{
 	
 	String idCasDel;
 	
+	
 	String contadorString;
 	Integer contadorControlador;
 	List<CasillaNueva> casillaNueva = new ArrayList<CasillaNueva>();
@@ -106,11 +107,30 @@ public class GestionFormulariosBean implements Serializable{
 			formModif.setNombre(nombreForm);
 			formModif.setResumen(resumenForm);
 			formulariosBean.EditarFormulario(formModif);
-			
-			System.out.println(casillaNueva.get(0).getIdCasilla());
-			System.out.println(casillaNueva.get(0).getDescripcion());
-			System.out.println(casillaNueva.get(0).getNombre());
-			System.out.println();
+			addMessage("Formulario modificado satisfactoriamente", "Formulario modificado");
+
+			for (Integer i = 0 ; i <=casillaNueva.size()-1; i++) {
+				Long idCasillaModif = casillaNueva.get(i).getIdCasilla();
+				
+				try {
+				casillasBean.ModificarCasilla(idCasillaModif, casillaNueva.get(i).getNombre(),
+															  casillaNueva.get(i).getDescripcion(),
+															  casillaNueva.get(i).getParametro(),
+															  casillaNueva.get(i).getUnidadesMedida(),
+															  casillaNueva.get(i).getTiposDato(), formModif);
+				addMessage("Casilla modificada satisfactoriamente", "Casilla Modificada");
+
+				}catch(Exception e) {
+					casillasBean.altaCasilla(casillaNueva.get(i).getNombre(),
+							  				 casillaNueva.get(i).getDescripcion(),
+							  				 casillaNueva.get(i).getParametro(),
+							  				 casillaNueva.get(i).getUnidadesMedida(),
+							  				 casillaNueva.get(i).getTiposDato(), formModif);
+					
+					addMessage("Casilla creada satisfactoriamente", "Casilla Creada");
+				}
+				
+			}
 			
 			System.out.println("Llega bien hasta acá");
 			
