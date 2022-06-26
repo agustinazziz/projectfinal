@@ -63,6 +63,8 @@ public class DAOActividad {
 		
 	}
 	
+	
+	
 	public Actividad buscarActividad (Long idActividad) {
 		TypedQuery<Actividad> query = em.createQuery("SELECT a FROM Actividad a WHERE a.idActividad=:idActividad", Actividad.class);
 		Actividad actBuscada= query.getSingleResult();
