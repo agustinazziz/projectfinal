@@ -69,6 +69,8 @@ public class DAOActividad {
 		return actBuscada;
 	}
 	
+	
+	
 	public List<Actividad> listarActividades () {
 		TypedQuery<Actividad> query = em.createQuery("SELECT a FROM Actividad a", Actividad.class);
 		List<Actividad> actBuscadas= query.getResultList();
