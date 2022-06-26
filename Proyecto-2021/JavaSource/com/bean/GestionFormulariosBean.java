@@ -112,11 +112,11 @@ public class GestionFormulariosBean implements Serializable{
 			
 			System.out.println("Llega bien hasta acá");
 			
-			rerturn "/pages/formularios.xhtml";
+			return "/pages/formularios.xhtml";
 		}catch(PersistenciaException e) {
 			e.printStackTrace();
 		}
-		
+		return"";
 	}
 	
 	public String prerpModifForm() {
