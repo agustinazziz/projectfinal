@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import com.capa2LogicaNegocio.ActividadBeanRemote;
@@ -84,6 +86,8 @@ public class GestionActividadBean implements Serializable {
 		try {
 //Alta de actividad
 			actividadBean.agregarActividad(nuevaActividad);
+			addMessage("Actividad crada satisfactoriamente", "Actividad creada");
+
 //Buscamos el form 
 			formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 //Seteamos lista de casillas
@@ -100,11 +104,15 @@ public class GestionActividadBean implements Serializable {
 						casillasBean.ModificarCasilla(casillaModif.getIdCasilla(), casillaModif.getNombre(),
 								casillaModif.getDescripcion(), casillaModif.getParametro(),
 								casillaModif.getUnidadesMedida(), casillaModif.getTiposDato(), casillaModif.getFormNuevo());
+								addMessage("Casilla modificada satisfactoriamente", "Casilla modificada");
+
 					}catch (Exception e) {
 								casillasBean.altaCasilla(casillaModif.getNombre(),
 							  	casillaModif.getDescripcion(), casillaModif.getParametro(),
 							  	casillaModif.getTiposDato(),casillaModif.getUnidadesMedida(),
 							  	casillaModif.getFormNuevo());
+								addMessage("Casilla crada satisfactoriamente", "Casilla creada");
+
 					}
 
 				
@@ -129,6 +137,11 @@ public class GestionActividadBean implements Serializable {
 		
 		return redireccion;
 	}
+	
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
 	public void addContador() {
 		contador = contador + 1;
