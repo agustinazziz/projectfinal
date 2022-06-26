@@ -29,8 +29,8 @@
 			<p:outputLabel for_="txtError" rendered="false" value="Usuario o contraseña incorrectos."/>
 	
 			<p:commandButton value="Iniciar Sesión" action="#{gestionUsuarios.inicioSesion}" update="@form">
-				<f:param name="usuarioActividad" value="#{gestionUsuarios.nomUser}"/>
-				<f:param name="contraseñaActividad" value="#{gestionUsuarios.contrasenia}"/>
+				<f:param name="usuarioActividad" value="#{gestionUsuarios.nomUser}" update="@form"/>
+				<f:param name="contraseñaActividad" value="#{gestionUsuarios.contrasenia}" update="@form"/>
 			</p:commandButton>
 	</h:panelGrid>		
 

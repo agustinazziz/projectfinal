@@ -81,15 +81,15 @@ public class GestionActividadBean implements Serializable {
 	public String salvarCambios() throws Exception {
 		
 		formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
-		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
 		
+		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
 		
 		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo, latitud, longitud, usuarioCreador, formActividad);
 		
-		usuarioCreador.addActividad(nuevaActividad);
-		
-		
 		actividadBean.agregarActividad(nuevaActividad);
+		
+		
+		
 		
 		for (Integer i = 0 ; i <= contador-1 ; i++) {
 			try {
@@ -111,7 +111,6 @@ public class GestionActividadBean implements Serializable {
 				
 			
 			}
-			
 			
 		}
 		

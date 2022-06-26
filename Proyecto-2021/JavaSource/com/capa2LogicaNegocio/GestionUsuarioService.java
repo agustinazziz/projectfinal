@@ -65,7 +65,15 @@ public class GestionUsuarioService implements Serializable{
 
 	
 
-	
+	public void modificarUsuarioEmpresa (UsuarioEmpresa usuario) {
+		
+		try {
+			usuariosPersistenciaDAO.modificarUsuario(usuario);
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public List<Usuario> seleccionarUsuarios() throws PersistenciaException {
 		//buscamos todos los  objetos UsuarioEmpresa

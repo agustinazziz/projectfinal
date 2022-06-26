@@ -1,16 +1,19 @@
 package com.bean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import java.io.Serializable;
-import javax.inject.Named;
-import com.capa2LogicaNegocio.Usuario;
-import com.capa2LogicaNegocio.GestionUsuarioService;
-import com.exception.PersistenciaException;
-import com.utils.ExceptionsTools;
 import javax.enterprise.context.SessionScoped;	//JEE8
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
+
+import com.capa2LogicaNegocio.GestionUsuarioService;
+import com.capa2LogicaNegocio.Usuario;
+import com.entities.UsuarioEmpresa;
+import com.exception.PersistenciaException;
+import com.utils.ExceptionsTools;
 
 
 @Named(value="gestionUsuario")		//JEE8
@@ -71,7 +74,11 @@ public class GestionUsuarioBean implements Serializable{
 	}
 	
 	
-
+	public void modificarUsuarioEmpresa(UsuarioEmpresa usuario) {
+		
+		gestionUsuarioService.modificarUsuarioEmpresa(usuario);
+		
+	}
 	
 		
 	

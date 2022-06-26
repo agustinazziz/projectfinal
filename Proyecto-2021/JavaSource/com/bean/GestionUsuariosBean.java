@@ -69,7 +69,7 @@ public class GestionUsuariosBean implements Serializable{
 			
 			if (usuarioEncontrado !=null) {
 			rol=usuarioEncontrado.getRolUsuario();
-			redireccion="principal";
+			redireccion="/pages/principal.xhtml";
 			
 			}
 			else {
