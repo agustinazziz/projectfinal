@@ -107,7 +107,7 @@ public class GestionFormulariosBean implements Serializable{
 			formModif.setResumen(resumenForm);
 			formulariosBean.EditarFormulario(formModif);
 			
-			System.out.println(idCasDel);
+			System.out.println(casillaNueva.get(0));
 			System.out.println();
 			
 			System.out.println("Llega bien hasta acá");
