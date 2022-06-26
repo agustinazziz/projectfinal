@@ -80,6 +80,8 @@ public class GestionActividadBean implements Serializable {
 		String redireccion="";
 //Conseguimos el usuario creador.
 		usuarioCreador = gestionUsuario.buscarInicioSesion(usuarioActividad, contraseñaActividad);
+//Buscamos el form 
+		formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 //Instanciamos actividad nueva
 		Actividad nuevaActividad = new Actividad(caracteristica, fechaIni, fechaFin, metodoMuestreo, tipoMuestreo,
 				usuarioCreador, formActividad);
@@ -88,8 +90,6 @@ public class GestionActividadBean implements Serializable {
 			actividadBean.agregarActividad(nuevaActividad);
 			addMessage("Actividad crada satisfactoriamente", "Actividad creada");
 
-//Buscamos el form 
-			formActividad = formulariosBean.buscarFormulario(Long.parseLong(idForm));
 //Seteamos lista de casillas
 			formActividad.setCasillaNueva(casillaNueva);
 //Agregamos actividad
@@ -108,10 +108,10 @@ public class GestionActividadBean implements Serializable {
 
 					}catch (Exception e) {
 								casillasBean.altaCasilla(casillaModif.getNombre(),
-							  	casillaModif.getDescripcion(), casillaModif.getParametro(),
-							  	casillaModif.getTiposDato(),casillaModif.getUnidadesMedida(),
-							  	casillaModif.getFormNuevo());
-								addMessage("Casilla crada satisfactoriamente", "Casilla creada");
+														 casillaModif.getDescripcion(), casillaModif.getParametro(),
+														 casillaModif.getTiposDato(),casillaModif.getUnidadesMedida(),
+														 casillaModif.getFormNuevo());
+								addMessage("Casilla creada satisfactoriamente", "Casilla creada");
 
 					}
 

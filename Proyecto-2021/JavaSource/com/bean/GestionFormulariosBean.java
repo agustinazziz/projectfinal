@@ -113,12 +113,12 @@ public class GestionFormulariosBean implements Serializable{
 				Long idCasillaModif = casillaNueva.get(i).getIdCasilla();
 				
 				try {
-				casillasBean.ModificarCasilla(idCasillaModif, casillaNueva.get(i).getNombre(),
-															  casillaNueva.get(i).getDescripcion(),
-															  casillaNueva.get(i).getParametro(),
-															  casillaNueva.get(i).getUnidadesMedida(),
-															  casillaNueva.get(i).getTiposDato(), formModif);
-				addMessage("Casilla modificada satisfactoriamente", "Casilla Modificada");
+					casillasBean.ModificarCasilla(idCasillaModif, casillaNueva.get(i).getNombre(),
+																  casillaNueva.get(i).getDescripcion(),
+																  casillaNueva.get(i).getParametro(),
+																  casillaNueva.get(i).getUnidadesMedida(),
+																  casillaNueva.get(i).getTiposDato(), formModif);
+					addMessage("Casilla modificada satisfactoriamente", "Casilla Modificada");
 
 				}catch(Exception e) {
 					casillasBean.altaCasilla(casillaNueva.get(i).getNombre(),
