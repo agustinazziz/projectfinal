@@ -10,16 +10,18 @@
 		<c:set var="title" value="Login" scope="request" />
 	</ui:define>
 	
-	<ui:define name="content">
-	<h:form>
-		<p:messages autoUpdate="true" visible="true"/>
-	<h:panelGrid columns="2">
-			
 			<f:metadata>
 				<f:viewParam name="usuarioActividad" value="#{gestionActividad.usuarioActividad}" />
 				<f:viewParam name="contraseñaActividad" value="#{gestionActividad.contraseñaActividad}" />
 			
 			</f:metadata>
+		
+	<ui:define name="content">
+	<h:form>
+		<p:messages autoUpdate="true" visible="true"/>
+	<h:panelGrid columns="2">
+			
+
 			
 			<p:outputLabel for_="txtUsuario" value="Usuario"/>
 			<p:inputText id="txtUsuario" value="#{gestionUsuarios.nomUser}" required="true" requiredMessage="Ingresar Usuario"/>
@@ -28,10 +30,10 @@
 			<p:password id="txtClave" value="#{gestionUsuarios.contrasenia}" required="true" requiredMessage="Ingresar Contraseña"/>
 			<p:outputLabel for_="txtError" rendered="false" value="Usuario o contraseña incorrectos."/>
 	
-			<p:commandButton value="Iniciar Sesión" action="#{gestionUsuarios.inicioSesion}" update="@form">
-				<f:param name="usuarioActividad" value="#{gestionUsuarios.nomUser}" update="@form"/>
-				<f:param name="contraseñaActividad" value="#{gestionUsuarios.contrasenia}" update="@form"/>
-			</p:commandButton>
+			<h:commandButton value="Iniciar Sesión" action="#{gestionUsuarios.inicioSesion}" update=":form">
+				<f:param name="usuarioActividad" value="#{gestionUsuarios.nomUser}" update=":form"/>
+				<f:param name="contraseñaActividad" value="#{gestionUsuarios.contrasenia}" update=":form"/>
+			</h:commandButton>
 	</h:panelGrid>		
 
 		</h:form>
